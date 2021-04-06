@@ -1,4 +1,4 @@
-package fr.eni.template;
+package fr.eni.enchere;
 
 import java.util.ArrayList;
 import java.util.List;

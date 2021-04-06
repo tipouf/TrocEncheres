@@ -1,4 +1,4 @@
-package fr.eni.template;
+package fr.eni.enchere;
 
 import java.io.IOException;
 import java.sql.Connection;
