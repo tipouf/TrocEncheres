@@ -6,7 +6,7 @@ public class ArticleVendu {
 
     int noArticle;
     String nomArticle;
-    String description;
+    String description;BO ARTICLE VENDU
     LocalDate dateDebutEncheres;
     int prixInitial;
     int prixVente;
