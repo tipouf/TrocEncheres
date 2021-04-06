@@ -14,5 +14,5 @@
   	<url-pattern>/accueil</url-pattern>
   </servlet-mapping>
  
-  
+
 </web-app>
