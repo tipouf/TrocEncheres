@@ -14,7 +14,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	private static final String INSERT = 
 			"INSERT INTO UTILISATEURS(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) "
-		  + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, );";
+		  + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	
 	private static final String SELECT = 
 			"SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur "
@@ -29,6 +29,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			"SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur "
 		  + "FROM UTILISATEURS "
 		  + "WHERE email LIKE ?;";
+	
+	private static final String GET_BY_PSEUDO = 
+			"SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur "
+		  + "FROM UTILISATEURS "
+		  + "WHERE pseudo LIKE ?;";
 	
 	private static final String GET_BY_EMAIL_OR_PSEUDO = 
 			"SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur "
@@ -152,6 +157,30 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			PreparedStatement pStmt = cnx.prepareStatement(GET_BY_EMAIL_OR_PSEUDO);
 			pStmt.setString(1, emailOrPseudo);
 			pStmt.setString(2, emailOrPseudo);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while (rs.next()) {
+				
+				utilisateur = parseResultRow(rs);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return utilisateur;
+	}
+	
+	@Override
+	public Utilisateur getByPseudo(String pseudo) {
+		
+		Utilisateur utilisateur = null;
+		
+		try(Connection cnx = ConnectionProvider.getConnection()) {
+			
+			PreparedStatement pStmt = cnx.prepareStatement(GET_BY_PSEUDO);
+			pStmt.setString(1, pseudo);
 			
 			ResultSet rs = pStmt.executeQuery();
 			

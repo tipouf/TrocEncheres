@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Encheres - Connexion</title>
 </head>
 <body>
 
@@ -16,10 +16,10 @@
 	
 	<form action="" method="POST">
 	
-		<input type="text" name="emailOrPseudo" />
-		<input type="password" name="password" />
+		<input type="text" name="emailOrPseudo" required>
+		<input type="password" name="password" required>
 		
-		<input type="submit" />
+		<input type="submit">
 		
 		<% if(error != null) { %>
 			<span class=""><%= error %></span>

@@ -16,4 +16,6 @@ public interface UtilisateurDAO {
 	public Utilisateur getById(int id);
 	
 	public Utilisateur getByEmailOrPseudo(String emailOrPseudo);
+	
+	public Utilisateur getByPseudo(String email);
 }

@@ -1,7 +1,6 @@
 package fr.eni.enchere.servlets;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.enchere.bll.UtilisateurManager;
+import fr.eni.enchere.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletConnexion
@@ -18,9 +18,11 @@ import fr.eni.enchere.bll.UtilisateurManager;
 @WebServlet("/login")
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final String SALT = "salt";
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Page affichée lorsque l'utilisateur n'est pas connecté à l'appli
+	 * Page par défaut
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
@@ -28,7 +30,7 @@ public class ServletConnexion extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Tentative de connexion de l'utilisateur
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -36,12 +38,25 @@ public class ServletConnexion extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
-		boolean isValidUser = utilisateurManager.isValidUser(emailOrPseudo, password);
+		Utilisateur utilisateur = utilisateurManager.getByEmailOrPseudo(emailOrPseudo);
 					
 		RequestDispatcher rd = null;
 		
-		if (isValidUser) {
-			rd = request.getRequestDispatcher("/views/home.jsp");
+		if (utilisateur != null) {
+														
+			// Test du mot de passe
+			if (utilisateurManager.encryptPassword(password, SALT).equals(utilisateur.getMotDePasse())) {
+				
+				// Ajout d'une variable de session "user_id" pour autoriser l'accès aux autres pages du site
+				request.getSession().setAttribute("user_id", utilisateurManager.getByEmailOrPseudo(emailOrPseudo).getNoUtilisateur());
+				
+				rd = request.getRequestDispatcher("/views/home.jsp");		
+				
+			} else {
+				rd = request.getRequestDispatcher("/views/login.jsp");
+				request.setAttribute("error", "Mot de passe incorrect");
+			}
+
 		} else {
 			rd = request.getRequestDispatcher("/views/login.jsp");
 			request.setAttribute("error", "Utilisateur incorrect");
@@ -49,5 +64,4 @@ public class ServletConnexion extends HttpServlet {
 
 		rd.forward(request, response);
 	}
-
 }
