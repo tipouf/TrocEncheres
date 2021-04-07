@@ -54,13 +54,13 @@
 				<div class=" form-group row">
 					<label for="lastName" class="col-sm-2 col-form-label">Identifiant:</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="identifiant"
+						<input type="text" class="form-control" name="identifiant" required
 							placeholder="Identifiant">
 					</div>
 					<label for="lastName" class="col-sm-2 col-form-label">Mot
 						de passe:</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="motDePasse"
+						<input type="text" class="form-control" name="motDePasse" required
 							placeholder="Mot de passe">
 					</div>
 				</div>

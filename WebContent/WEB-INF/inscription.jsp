@@ -49,7 +49,7 @@
 				<div class=" form-group row">
 					<label for="lastName" class="col-sm-2 col-form-label">Pseudo:</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="pseudo"
+						<input type="text" class="form-control" name="pseudo" required
 							placeholder="Pseudo">
 					</div>
 					<label for="lastName" class="col-sm-2 col-form-label">Nom:</label>
@@ -62,12 +62,12 @@
 				<div class="form-group row">
 					<label for="firstName" class="col-sm-2 col-form-label">Prénom:</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="prenom"
+						<input type="text" class="form-control" name="prenom" required
 							placeholder="Prénom">
 					</div>
 					<label for="contact" class="col-sm-2 col-form-label">Email:</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="email"
+						<input type="text" class="form-control" name="email" required
 							placeholder="Email">
 					</div>
 				</div>
@@ -75,12 +75,12 @@
 				<div class="form-group row">
 					<label for="contact" class="col-sm-2 col-form-label">Téléphone:</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="rue"
+						<input type="text" class="form-control" name="telephone"
 							placeholder="Téléphone">
 					</div>
 					<label for="contact" class="col-sm-2 col-form-label">Rue:</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="rue"
+						<input type="text" class="form-control" name="rue" required
 							placeholder="Rue">
 					</div>
 				</div>
@@ -89,12 +89,12 @@
 					<label for="lastName" class="col-sm-2 col-form-label">Code
 						postal:</label>
 					<div class="col-sm-4">
-						<input type="password" class="form-control" name="codepostal"
+						<input type="password" class="form-control" name="codepostal" required
 							placeholder="Code Postal">
 					</div>
 					<label for="lastName" class="col-sm-2 col-form-label">Ville:</label>
 					<div class="col-sm-4">
-						<input type="ville" class="form-control" name="ville"
+						<input type="ville" class="form-control" name="ville" required
 							placeholder="Ville">
 					</div>
 				</div>
@@ -103,12 +103,12 @@
 					<label for="motdepasse" class="col-sm-2 col-form-label">Mot
 						de passe:</label>
 					<div class="col-sm-4">
-						<input type="password" class="form-control" name="motdepasse"
+						<input type="password" class="form-control" name="motdepasse" required
 							placeholder="Mot de passe">
 					</div>
 					<label for="confirmation" class="col-sm-2 col-form-label">Confirmation:</label>
 					<div class="col-sm-4">
-						<input type="password" class="form-control" name="ville"
+						<input type="password" class="form-control" name="ville" required
 							placeholder="Confirmation du mot de passe">
 					</div>
 				</div>
