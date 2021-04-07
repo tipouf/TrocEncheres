@@ -2,17 +2,25 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
   <display-name>Enchere</display-name>
   <welcome-file-list>
-    <welcome-file>ServletAccueil</welcome-file>
+    <welcome-file>index</welcome-file>
   </welcome-file-list>
-  
-   <servlet>
-  	<servlet-name>ACCUEIL</servlet-name>
-  	<jsp-file>/WEB-INF/index.jsp</jsp-file>
+ 
+ <servlet>
+  	<servlet-name>CONNEXION</servlet-name>
+  	<jsp-file>/WEB-INF/connexion.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>ACCUEIL</servlet-name>
-  	<url-pattern>/accueil</url-pattern>
+  	<servlet-name>CONNEXION</servlet-name>
+  	<url-pattern>/connexion</url-pattern>
   </servlet-mapping>
  
-
+  <servlet>
+  	<servlet-name>INSCRIPTION</servlet-name>
+  	<jsp-file>/WEB-INF/inscription.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>INSCRIPTION</servlet-name>
+  	<url-pattern>/inscription</url-pattern>
+  </servlet-mapping>
+ 
 </web-app>

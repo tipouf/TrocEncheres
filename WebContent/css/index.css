@@ -1,0 +1,8 @@
+.image {
+	max-width: -webkit-fill-available;
+}
+
+body {
+	background: no-repeat url("../img/background.png");
+	background-size: cover;
+}
