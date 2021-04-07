@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page session="false"%>
+<%@page import="java.util.List"%>
+<%@page import="fr.eni.enchere.messages.LecteurMessage"%>
 <head>
 
+<%
+	List<Integer> erreurs = (List<Integer>) request.getAttribute("erreurs");
+	if (erreurs != null) {
+%>
+<h2 style="color: red">Une erreur est survenue !</h2>
+<%
+	for (int code : erreurs) {
+%>
+<p><%=LecteurMessage.getMessageErreur(code)%></p>
+<%
+	}
+%>
+<%
+	}
+%>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,13 +42,14 @@
 <link href="${pageContext.request.contextPath}/css/connexion.css"
 	rel="stylesheet">
 
-<%@include file="header.jsp"%>
+<%@include file="entete.jsp"%>
 </head>
 <body>
 	<div class="container jumbotron marginConnexion">
 		<h1>Page de connexion</h1>
 		<div class="card-body">
-			<form action="<%=request.getContextPath()%>/ServletConnexion" method="post">
+			<form action="<%=request.getContextPath()%>/ServletConnexion"
+				method="post">
 
 				<div class=" form-group row">
 					<label for="lastName" class="col-sm-2 col-form-label">Identifiant:</label>
