@@ -19,7 +19,7 @@ import fr.eni.enchere.bo.Utilisateur;
 /**
  * Servlet implementation class ServletInscription
  */
-@WebServlet("/signup")
+@WebServlet("/inscription")
 public class ServletInscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final String SALT = "salt";
@@ -28,7 +28,7 @@ public class ServletInscription extends HttpServlet {
 	 * Page d'inscription à l'application
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/views/sign_up.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
 		rd.forward(request, response);
 	}
 
@@ -45,7 +45,7 @@ public class ServletInscription extends HttpServlet {
 		String rue = request.getParameter("rue");
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
-		String password = request.getParameter("password");
+		String password = request.getParameter("motDePasse");
 
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		
@@ -61,11 +61,11 @@ public class ServletInscription extends HttpServlet {
 				utilisateurManager.ajouter(utilisateur);
 			} catch(Exception e) {}
 			
-			 rd = request.getRequestDispatcher("/views/login.jsp");
+			 rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 
 		} else {
 			request.setAttribute("error", "Le pseudo existe déjà");
-			rd = request.getRequestDispatcher("/views/sign_up.jsp");
+			rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
 		}
 		
 		rd.forward(request, response);

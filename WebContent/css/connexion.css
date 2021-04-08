@@ -1,0 +1,12 @@
+.marginConnexion {
+	margin-top:10%;
+}
+
+button {
+	//margin-right: 30px;
+	//width:20%;
+}
+
+.login-buttons >*:last-child {
+	margin-right: 10px;
+}

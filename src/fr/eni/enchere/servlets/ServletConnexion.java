@@ -15,7 +15,7 @@ import fr.eni.enchere.bo.Utilisateur;
 /**
  * Servlet implementation class ServletConnexion
  */
-@WebServlet("/login")
+@WebServlet("/connexion")
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final String SALT = "salt";
@@ -25,7 +25,7 @@ public class ServletConnexion extends HttpServlet {
 	 * Page par défaut
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 		rd.forward(request, response);
 	}
 
@@ -34,8 +34,8 @@ public class ServletConnexion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String emailOrPseudo = request.getParameter("emailOrPseudo");
-		String password = request.getParameter("password");
+		String emailOrPseudo = request.getParameter("identifiant");
+		String password = request.getParameter("motDePasse");
 		
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Utilisateur utilisateur = utilisateurManager.getByEmailOrPseudo(emailOrPseudo);
@@ -50,15 +50,15 @@ public class ServletConnexion extends HttpServlet {
 				// Ajout d'une variable de session "user_id" pour autoriser l'accès aux autres pages du site
 				request.getSession().setAttribute("user_id", utilisateurManager.getByEmailOrPseudo(emailOrPseudo).getNoUtilisateur());
 				
-				rd = request.getRequestDispatcher("/views/home.jsp");		
+				rd = request.getRequestDispatcher("/WEB-INF/index.jsp");		
 				
 			} else {
-				rd = request.getRequestDispatcher("/views/login.jsp");
+				rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 				request.setAttribute("error", "Mot de passe incorrect");
 			}
 
 		} else {
-			rd = request.getRequestDispatcher("/views/login.jsp");
+			rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 			request.setAttribute("error", "Utilisateur incorrect");
 		}
 
