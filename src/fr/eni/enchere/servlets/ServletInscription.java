@@ -25,7 +25,7 @@ public class ServletInscription extends HttpServlet {
 	private final String SALT = "salt";
 
 	/**
-	 * Page d'inscription √† l'application
+	 * Page d'inscription ‡ l'application
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
@@ -46,6 +46,7 @@ public class ServletInscription extends HttpServlet {
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
 		String password = request.getParameter("motDePasse");
+		String confirmPassword = request.getParameter("confirmationMotDePasse");
 
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		
@@ -53,7 +54,7 @@ public class ServletInscription extends HttpServlet {
 		
 		if (utilisateurManager.isPseudoAvailable(pseudo)) {
 			
-			String encryptedPassword = utilisateurManager.encryptPassword(password, SALT);
+			String encryptedPassword = utilisateurManager.encryptPassword(password);
 			
 			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, encryptedPassword, 100, false);
 			
@@ -64,7 +65,7 @@ public class ServletInscription extends HttpServlet {
 			 rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 
 		} else {
-			request.setAttribute("error", "Le pseudo existe d√©j√†");
+			request.setAttribute("error", "Le pseudo existe dÈj‡");
 			rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
 		}
 		
