@@ -16,7 +16,7 @@ public class Utilisateur {
 	private boolean administrateur;
 	
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse, boolean administrateur) {
+			String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		super();
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -27,7 +27,15 @@ public class Utilisateur {
 		this.codePostal = codePostal;
 		this.ville = ville;
 		this.motDePasse = motDePasse;
+		this.credit = credit;
 		this.administrateur = administrateur;
+	}
+	
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+		
+		this(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
+		this.noUtilisateur = noUtilisateur;
 	}
 
 	public int getNoUtilisateur() {
