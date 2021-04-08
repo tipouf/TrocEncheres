@@ -27,7 +27,7 @@
 <link href="${pageContext.request.contextPath}/css/connexion.css"
 	rel="stylesheet">
 
-<%@include file="header.jsp"%>
+<%@include file="entete.jsp"%>
 </head>
 <body>
 	<div class="container jumbotron marginConnexion">

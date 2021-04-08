@@ -21,7 +21,7 @@
   <!-- Custom styles for this template -->
   <link href="${pageContext.request.contextPath}/css/inscription.css" rel="stylesheet">
   
-  <%@include file="header.jsp" %>
+  <%@include file="entete.jsp" %>
 </head>
 <body>
 	
