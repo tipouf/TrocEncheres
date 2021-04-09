@@ -7,7 +7,7 @@
 <head>
 
 <%
-	String error = (String)request.getAttribute("error");
+	String error = (String) request.getAttribute("error");
 %>
 
 <meta charset="utf-8">
@@ -16,7 +16,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Bienvenue sur Enchere-ENI</title>
+<title>Page de connexion</title>
 
 <!-- Bootstrap core CSS -->
 <link
@@ -31,7 +31,7 @@
 </head>
 <body>
 	<div class="container jumbotron marginConnexion">
-		<h1>Page de connexion</h1>
+			<h1 class="display-4 text-left">Connexion</h1>
 		<div class="card-body">
 			<form action="<%=request.getContextPath()%>/connexion" method="post">
 
@@ -47,36 +47,32 @@
 						<input type="password" class="form-control" name="motDePasse"
 							placeholder="Mot de passe">
 					</div>
-					
-					<% if(error != null) { %>
-						<span class="text-danger"><%= error %></span>
-					<% } %>
+
+					<%
+						if (error != null) {
+					%>
+					<span class="text-danger"><%=error%></span>
+					<%
+						}
+					%>
 				</div>
 				<div class="clearfix mt-3 login-buttons">
-					<button type="submit" 
-						class="btn btn-primary float-end"
+					<button type="submit" class="btn btn-primary float-end"
 						data-dismiss="modal">
 						<span class="glyphicon glyphicon-remove"></span>Connexion
 					</button>
-					<a
-						class="btn btn-danger float-end"
+					<a class="btn btn-danger float-end"
 						href="${pageContext.request.contextPath}/inscription"
-						data-dismiss="modal">
-						Créer un compte
-					</a>
+						data-dismiss="modal"> Créer un compte </a>
 				</div>
 			</form>
 		</div>
-		
-			
-		</div>
-	</div>
-	<div class="modal-footer">
-
 	</div>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

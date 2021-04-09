@@ -1,10 +1,8 @@
 package fr.eni.enchere.servlets;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,7 +23,7 @@ public class ServletInscription extends HttpServlet {
 	private final String SALT = "salt";
 
 	/**
-	 * Page d'inscription � l'application
+	 * Page d'inscription à l'application
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
@@ -36,7 +34,12 @@ public class ServletInscription extends HttpServlet {
 	 * Tentative d'inscription d'un nouvel utilisateur
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+		RequestDispatcher rd = null;
+		String error = null;
+
+		UtilisateurManager utilisateurManager = new UtilisateurManager();
+
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -46,29 +49,38 @@ public class ServletInscription extends HttpServlet {
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
 		String password = request.getParameter("motDePasse");
-		String confirmPassword = request.getParameter("confirmationMotDePasse");
+		String confirmPassword = request.getParameter("confirmation");
 
-		UtilisateurManager utilisateurManager = new UtilisateurManager();
-		
-		RequestDispatcher rd = null;
-		
-		if (utilisateurManager.isPseudoAvailable(pseudo)) {
-			
-			String encryptedPassword = utilisateurManager.encryptPassword(password);
-			
-			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, encryptedPassword, 100, false);
-			
-			try {
-				utilisateurManager.ajouter(utilisateur);
-			} catch(Exception e) {}
-			
-			 rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+		Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+$");
+		Matcher matcher = pattern.matcher(password);
 
-		} else {
-			request.setAttribute("error", "Le pseudo existe d�j�");
-			rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
+		if (!password.equals(confirmPassword)) {
+			error = "Les mots de passe ne correspondent pas";
+
+		} else if (!utilisateurManager.isPseudoAvailable(pseudo)) {
+			error = "Le pseudo existe déjà";
+
+		} else if (!utilisateurManager.isEmailAvailable(email)) {
+			error = "L'email existe déjà";
+
+		} else if (!matcher.matches()) {
+			error = "Le pseudo ne doit contenir que des caractères alphanumériques";
 		}
-		
+
+		// Redirige vers la page inscription avec un message d'erreur
+		if (error != null) {
+			request.setAttribute("error", error);
+			rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
+			rd.forward(request, response);
+		}
+
+		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, utilisateurManager.encryptPassword(password), 100, false);
+
+		try {
+			utilisateurManager.ajouter(utilisateur);
+		} catch (Exception e) {}
+
+		rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 		rd.forward(request, response);
 	}
 }

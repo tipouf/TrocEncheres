@@ -1,3 +1,8 @@
+body {
+	background: no-repeat url("../img/background.png");
+	background-size: cover;
+}
+
 .marginInscription {
 	margin-top:10%;
 }
@@ -5,4 +10,11 @@
 button {
 	margin-right: 30px;
 	width:20%;
+}
+
+.jumbotron {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: .3rem;
 }
