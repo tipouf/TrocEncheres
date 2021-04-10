@@ -58,13 +58,13 @@ public class ServletInscription extends HttpServlet {
 			error = "Les mots de passe ne correspondent pas";
 
 		} else if (!utilisateurManager.isPseudoAvailable(pseudo)) {
-			error = "Le pseudo existe d√©j√†";
+			error = "Le pseudo existe dÈj‡†";
 
 		} else if (!utilisateurManager.isEmailAvailable(email)) {
-			error = "L'email existe d√©j√†";
+			error = "L'email existe dÈj‡†";
 
 		} else if (!matcher.matches()) {
-			error = "Le pseudo ne doit contenir que des caract√®res alphanum√©riques";
+			error = "Le mot de passe ne doit contenir que des caractËres alphanumÈriques";
 		}
 
 		// Redirige vers la page inscription avec un message d'erreur

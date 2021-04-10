@@ -127,7 +127,6 @@
 			<button class="btn btn-primary"
 				onclick="${pageContext.request.contextPath}/login">Annuler</button>
 		</div>
-
 	</div>
 
 <!-- Bootstrap core JavaScript -->

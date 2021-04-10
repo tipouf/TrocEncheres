@@ -16,17 +16,14 @@
 		if (request.getSession().getAttribute("user_id") != null) {
 	%>
 			<a class="ml-auto align-right"
-				href="${pageContext.request.contextPath}/connexion">Enchères <span
-				class="sr-only">(current)</span>
+				href="${pageContext.request.contextPath}/connexion">Enchères 
 			</a> <a class="ml-auto align-right"
 				href="${pageContext.request.contextPath}/vendre">Vendre un
-				articles <span class="sr-only">(current)</span>
+				articles 
 			</a> <a class="ml-auto align-right"
-				href="${pageContext.request.contextPath}/monProfil">Mon profil <span
-				class="sr-only">(current)</span>
+				href="${pageContext.request.contextPath}/monProfil">Mon profil 
 			</a> <a class="ml-auto align-right"
 				href="${pageContext.request.contextPath}/déconnexion">Déconnexion
-				<span class="sr-only">(current)</span>
 			</a>
 			<%
 		} else {
