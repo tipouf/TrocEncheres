@@ -47,11 +47,10 @@
 									<div class="input-group-btn search-panel">
 										<select class="btn btn-default dropdown-toggle"
 											data-toggle="dropdown">
-											<option>Toutes</option>
-											<option>Informatique</option>
-											<option>Ameublement</option>
-											<option>Vêtement</option>
-											<option>Sport&Loisirs</option>
+											<option value="toute">Toutes</option>
+											<c:forEach items="${categorie}" var="item">
+												<option value="${item}">${item}</option>
+											</c:forEach>
 										</select>
 									</div>
 
@@ -63,6 +62,13 @@
 										</button>
 									</span> <a href="#" class="btn btn-primary btn-lg">Rechercher</a>
 								</div>
+								<div class="form-check-inline col-6 p-3 mt-2">
+									<input checked class="form-check-input " type="radio"
+										id="achat" name="selectionFiltreAchats"> <label>Mes
+										achats</label> <input class="form-check-input " type="radio"
+										id="ventes" name="selectionFiltreVentes"> <label>Mes
+										ventes</label>
+								</div>
 							</form>
 						</div>
 					</div>
@@ -71,12 +77,14 @@
 		</div>
 	</div>
 
-<%@include file="listeVente.jsp"%>
+	<%@include file="listeVente.jsp"%>
 
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="${pageContext.request.contextPath}/vendor/jquery/popper.min.js"></script>
-	<script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendor/jquery/jquery-3.6.0.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

@@ -5,9 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Entête</title>
+<!-- Custom styles for this template -->
+<link href="${pageContext.request.contextPath}/css/entete.css"
+	rel="stylesheet">
 </head>
 <body>
 
+  <% System.out.println( "test = " + pageContext.SESSION ); %>
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">

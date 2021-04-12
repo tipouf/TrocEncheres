@@ -25,126 +25,25 @@
 	<!-- Page Features -->
 	<div class="container">
 		<div class="row text-center">
-
-			<div class="col-lg-4 col-md-6 mb-4">
-				<button class="card h-100 curseurOnCard" href="${pageContext.request.contextPath}/connexion">
-					<img class="card-img-top" src="http://placehold.it/400x400" alt="">
+  
+  
+  <c:forEach items="${articles}" var="article">
+  			<div class="col-lg-4 col-md-6 mb-4">
+  				<button class="card h-100 curseurOnCard" href="${pageContext.request.contextPath}/connexion">
+					<img class="card-img-top" src="http://placeimg.com/400/400/tech" alt="img">
 					<div class="card-body">
-						<h4 class="card-title">PC Gamer pour travailler</h4>
-						<p class="card-text ml-auto"><div>Prix: 210 points
+						<h4 class="card-title">${article.nomArticle}</h4>
+						<p class="card-text ml-auto"><div>${article.prixVente}
 					</div>
-					<div>Fin de l'enchere:
+					<div>Fin de l'enchere:${article.dateFinEncheres }
 					</div>
-					<div>Vendeur:
+					<div>Vendeur:${article.proprietaire}
 					</div>
 					</p></div>
 				</button>
 			</div>
-
-				<div class="col-lg-4 col-md-6 mb-4">
-				<button class="card h-100 curseurOnCard" onclick="${pageContext.request.contextPath}/login">
-					<img class="card-img-top" src="http://placehold.it/400x400" alt="">
-					<div class="card-body">
-						<h4 class="card-title">PC Gamer pour travailler</h4>
-						<p class="card-text ms-auto"><div>Prix: 210 points
-					</div>
-					<div>Fin de l'enchere:
-					</div>
-					<div>Vendeur:
-					</div>
-					</p></div>
-				</button>
-			</div>
-
-				<div class="col-lg-4 col-md-6 mb-4">
-				<button class="card h-100 curseurOnCard" onclick="${pageContext.request.contextPath}/login">
-					<img class="card-img-top" src="http://placehold.it/400x400" alt="">
-					<div class="card-body">
-						<h4 class="card-title">PC Gamer pour travailler</h4>
-						<p class="card-text"><div>Prix: 210 points
-					</div>
-					<div>Fin de l'enchere:
-					</div>
-					<div>Vendeur:
-					</div>
-					</p></div>
-				</button>
-			</div>
-
-			<div class="col-lg-4 col-md-6 mb-4">
-				<button class="card h-100 curseurOnCard" onclick="${pageContext.request.contextPath}/login">
-					<img class="card-img-top" src="http://placehold.it/400x400" alt="">
-					<div class="card-body">
-						<h4 class="card-title">PC Gamer pour travailler</h4>
-						<p class="card-text"><div>Prix: 210 points
-					</div>
-					<div>Fin de l'enchere:
-					</div>
-					<div>Vendeur:
-					</div>
-					</p></div>
-				</button>
-			</div>
-
-			<div class="col-lg-4 col-md-6 mb-4">
-				<button class="card h-100 curseurOnCard" onclick="${pageContext.request.contextPath}/login">
-					<img class="card-img-top" src="http://placehold.it/400x400" alt="">
-					<div class="card-body">
-						<h4 class="card-title">PC Gamer pour travailler</h4>
-						<p class="card-text"><div>Prix: 210 points
-					</div>
-					<div>Fin de l'enchere:
-					</div>
-					<div>Vendeur:
-					</div>
-					</p></div>
-				</button>
-			</div>
-
-				<div class="col-lg-4 col-md-6 mb-4">
-				<button class="card h-100 curseurOnCard" onclick="${pageContext.request.contextPath}/login">
-					<img class="card-img-top" src="http://placehold.it/400x400" alt="">
-					<div class="card-body">
-						<h4 class="card-title">PC Gamer pour travailler</h4>
-						<p class="card-text"><div>Prix: 210 points
-					</div>
-					<div>Fin de l'enchere:
-					</div>
-					<div>Vendeur:
-					</div>
-					</p></div>
-				</button>
-			</div>
-
-				<div class="col-lg-4 col-md-6 mb-4">
-				<button class="card h-100 curseurOnCard" onclick="${pageContext.request.contextPath}/login">
-					<img class="card-img-top" src="http://placehold.it/400x400" alt="">
-					<div class="card-body">
-						<h4 class="card-title">PC Gamer pour travailler</h4>
-						<p class="card-text"><div>Prix: 210 points
-					</div>
-					<div>Fin de l'enchere:
-					</div>
-					<div>Vendeur:
-					</div>
-					</p></div>
-				</button>
-			</div>
-
-	<div class="col-lg-4 col-md-6 mb-4">
-				<button class="card h-100 curseurOnCard" onclick="${pageContext.request.contextPath}/login">
-					<img class="card-img-top" src="http://placehold.it/400x400" alt="">
-					<div class="card-body">
-						<h4 class="card-title">PC Gamer pour travailler</h4>
-						<p class="card-text"><div>Prix: 210 points
-					</div>
-					<div>Fin de l'enchere:
-					</div>
-					<div>Vendeur:
-					</div>
-					</p></div>
-				</button>
-			</div>
+        </c:forEach>
+		
 		</div>
 	</div>
 
