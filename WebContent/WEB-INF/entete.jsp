@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Entête</title>
+<c:set var="context" value="${pageContext.request.contextPath}" />
 <!-- Custom styles for this template -->
 <link href="${pageContext.request.contextPath}/css/index.css"
 	rel="stylesheet">
@@ -23,20 +24,20 @@
 			<c:choose>
 				<c:when test="${sessionScope.user_id != null}">
 					<a class="ml-auto align-right"
-						href="${pageContext.request.contextPath}/connexion">Enchères </a>
+						href="${context}/connexion">Enchères </a>
 					<a class="ml-auto align-right"
-						href="${pageContext.request.contextPath}/vendre">Vendre un
+						href="${context}/vendre">Vendre un
 						articles </a>
 					<a class="ml-auto align-right"
-						href="${pageContext.request.contextPath}/monProfil">Mon profil
+						href="${context}/monProfil">Mon profil
 					</a>
 					<a class="ml-auto align-right"
-						href="${pageContext.request.contextPath}/ServletDeconnexion">Déconnexion
+						href="${context}/ServletDeconnexion">Déconnexion
 					</a>
 				</c:when>
 				<c:otherwise>
 					<a class="ml-auto align-right"
-						href="${pageContext.request.contextPath}/connexion">S'incrire
+						href="${context}/connexion">S'incrire
 						- Se connecter </a>
 				</c:otherwise>
 			</c:choose>
