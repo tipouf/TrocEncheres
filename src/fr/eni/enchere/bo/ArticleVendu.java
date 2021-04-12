@@ -14,6 +14,20 @@ public class ArticleVendu {
     Utilisateur proprietaire;
     Categorie categorie;
 
+
+    public ArticleVendu(String nomArticle, String description, Date dateDebutEncheres, Date dateFinEncheres,
+			int prixInitial, int prixVente, Utilisateur proprietaire, Categorie categorie) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.prixInitial = prixInitial;
+		this.prixVente = prixVente;
+		this.proprietaire = proprietaire;
+		this.categorie = categorie;
+	}
+    
     public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
                         Date dateFinEncheres,int prixInitial, int prixVente, Utilisateur utilisateur, Categorie categorie) {
         super();
@@ -27,7 +41,7 @@ public class ArticleVendu {
         this.categorie 			= categorie;
     }
 
-    public int getNoArticle() {
+	public int getNoArticle() {
         return noArticle;
     }
 

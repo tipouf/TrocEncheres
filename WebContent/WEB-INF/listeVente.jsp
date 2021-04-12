@@ -8,14 +8,14 @@
 <meta charset="UTF-8">
 <title>Liste des Ventes</title>
 
-
+<c:set var="context" value="${pageContext.request.contextPath}" />
 <!-- Bootstrap core CSS -->
 <link
-	href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css"
+	href="${context}/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="${pageContext.request.contextPath}/css/index.css"
+<link href="${context}/css/index.css"
 	rel="stylesheet">
 
 
@@ -29,28 +29,27 @@
   
   <c:forEach items="${articles}" var="article">
   			<div class="col-lg-4 col-md-6 mb-4">
-  				<button class="card h-100 curseurOnCard" href="${pageContext.request.contextPath}/connexion">
+  				<button class="card h-100 curseurOnCard" href="${context}/ServletEnchere?id=article.noArticle">
 					<img class="card-img-top" src="http://placeimg.com/400/400/tech" alt="img">
 					<div class="card-body">
-						<h4 class="card-title">${article.nomArticle}</h4>
-						<p class="card-text ml-auto"><div>${article.prixVente}
+						<h4 class="card-title text-center">article.nomArticle</h4>
+						<p class="card-text ml-auto"><div>article.prixVente
 					</div>
-					<div>Fin de l'enchere:${article.dateFinEncheres }
+					<div>Fin de l'enchere:article.dateFinEncheres
 					</div>
-					<div>Vendeur:${article.proprietaire}
+					<div>Vendeur:article.proprietaire
 					</div>
 					</p></div>
 				</button>
 			</div>
         </c:forEach>
-		
 		</div>
 	</div>
 
 	<!-- Bootstrap core JavaScript -->
 	<script
-		src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
+		src="${context}/vendor/jquery/jquery.min.js"></script>
 	<script
-		src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		src="${context}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

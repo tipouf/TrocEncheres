@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <head>
-
+<c:set var="context" value="${pageContext.request.contextPath}" />
 <%
 	String error = (String) request.getAttribute("error");
 %>
@@ -20,11 +20,11 @@
 
 <!-- Bootstrap core CSS -->
 <link
-	href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css"
+	href="${context}/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="${pageContext.request.contextPath}/css/connexion.css"
+<link href="${context}/css/connexion.css"
 	rel="stylesheet">
 
 <%@include file="entete.jsp"%>
@@ -62,7 +62,7 @@
 						<span class="glyphicon glyphicon-remove"></span>Connexion
 					</button>
 					<a class="btn btn-danger float-end"
-						href="${pageContext.request.contextPath}/inscription"
+						href="${context}/inscription"
 						data-dismiss="modal"> Créer un compte </a>
 				</div>
 			</form>
@@ -71,8 +71,8 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script
-		src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
+		src="${context}/vendor/jquery/jquery.min.js"></script>
 	<script
-		src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		src="${context}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -14,37 +14,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Page de connexion</title>
-
+<c:set var="context" value="${pageContext.request.contextPath}" />
 <!-- Bootstrap core CSS -->
-<link
-	href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css"
+<link href="${context}/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="${pageContext.request.contextPath}/css/inscription.css"
-	rel="stylesheet">
+<link href="${context}/css/inscription.css" rel="stylesheet">
 
 <%@include file="entete.jsp"%>
 </head>
 <body>
-
-	<%
-		List<Integer> erreurs = (List<Integer>)request.getAttribute("erreurs");
-		if(erreurs != null) {
-	%>
-	<h2 style="color: red">Une erreur est survenue !</h2>
-	<%
-			for(int code : erreurs) {
-		%>
-	<p><%=LecteurMessage.getMessageErreur(code) %></p>
-	<%
-			}
-		%>
-	<%
-		}
-	%>
 	<div class="container jumbotron marginInscription">
-			<h1 class="display-4 text-left">Créer profil</h1>
+		<h1 class="display-4 text-left">Créer profil</h1>
 		<div class="card-body">
 			<form action="<%=request.getContextPath()%>/inscription"
 				method="post">
@@ -129,10 +111,8 @@
 		</div>
 	</div>
 
-<!-- Bootstrap core JavaScript -->
-	<script
-		src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script src="${context}/vendor/jquery/jquery.min.js"></script>
+	<script src="${context}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

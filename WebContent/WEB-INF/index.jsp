@@ -15,15 +15,13 @@
 <meta name="author" content="">
 
 <title>Bienvenue sur Enchere-ENI</title>
-
+<c:set var="context" value="${pageContext.request.contextPath}" />
 <!-- Bootstrap core CSS -->
-<link
-	href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css"
+<link href="${context}/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="${pageContext.request.contextPath}/css/index.css"
-	rel="stylesheet">
+<link href="${context}/css/index.css" rel="stylesheet">
 
 <%@include file="entete.jsp"%>
 </head>
@@ -62,13 +60,58 @@
 										</button>
 									</span> <a href="#" class="btn btn-primary btn-lg">Rechercher</a>
 								</div>
-								<div class="form-check-inline col-6 p-3 mt-2">
-									<input checked class="form-check-input " type="radio"
-										id="achat" name="selectionFiltreAchats"> <label>Mes
-										achats</label> <input class="form-check-input " type="radio"
-										id="ventes" name="selectionFiltreVentes"> <label>Mes
-										ventes</label>
-								</div>
+
+								<c:if test="${sessionScope.user_id != null}">
+									<div class="row">
+										<div class="col-4 mt-2">
+											<input checked class="form-check-input " type="radio"
+												id="achat" name="selectionFiltreAchats"> <label>Mes
+												achats</label>
+										</div>
+										<div class="col-4 mt-2">
+											<input class="form-check-input " type="radio" id="ventes"
+												name="selectionFiltreVentes"> <label>Mes
+												ventes</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-4">
+											<input type="checkbox" id="encheresOuvertes"
+												name="enchereOuvertes"> <label>Encheres
+												ouvertes</label>
+										</div>
+
+										<div class="col-4">
+											<input type="checkbox" id="ventesEnCours" name="venteEnCours">
+											<label>Mes ventes en cours</label>
+										</div>
+
+										<div class="row">
+											<div class="col-4">
+												<input type="checkbox" id="EncheresEncours"
+													name="enchereEnCours"> <label>Mes enchères
+													en cours</label>
+											</div>
+
+											<div class="col-4">
+												<input type="checkbox" id="venteNonDebutees"
+													name="ventesNonDebutées"> <label>Ventes non
+													débutées</label>
+											</div>
+											<div class="row">
+												<div class="col-4">
+													<input type="checkbox" id="encheresRemportees"
+														name="enchereRemportees"> <label>Mes
+														enchères remportées</label>
+												</div>
+
+												<div class="col-4">
+													<input type="checkbox" id="venteTerminees"
+														name="venteTerminees"> <label>Vente
+														terminées</label>
+												</div>
+											</div>
+								</c:if>
 							</form>
 						</div>
 					</div>
@@ -81,10 +124,8 @@
 
 
 	<!-- Bootstrap core JavaScript -->
-	<script
-		src="${pageContext.request.contextPath}/vendor/jquery/jquery-3.6.0.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="${context}/vendor/jquery/jquery-3.6.0.min.js"></script>
+	<script src="${context}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
