@@ -19,7 +19,6 @@ public class ServletProfil extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String modification = request.getParameter("modifier");
-		System.out.println("modif = " + modification );
 		HttpSession session = request.getSession(true);    
 
 		int id = (int) session.getAttribute("user_id");

@@ -40,15 +40,14 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 					+ "FROM UTILISATEURS "
 					+ "WHERE email LIKE ? OR pseudo LIKE ?;";
 
-	private static final String UPDATE = "UPDATE UTILISATEURS SET " +
-			"pseudo = ?," +
+	private static final String UPDATE = "UPDATE UTILISATEURS SET pseudo = ?," +
 			"nom = ?," +
 			"prenom = ?," +
 			"email = ?," +
 			"telephone = ?," +
 			"rue = ?," +
 			"code_postal = ?," +
-			"ville = ?," +
+			"ville = ?," + 
 			"WHERE no_utilisateur = ?;";
 
 
@@ -242,25 +241,19 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 			PreparedStatement pStmt = cnx.prepareStatement(UPDATE);
 
-			pStmt.setString(1, utilisateur.getPseudo());
-			pStmt.setString(2, utilisateur.getNom());
-			pStmt.setString(3, utilisateur.getPrenom());
-			pStmt.setString(4, utilisateur.getEmail());
-			pStmt.setString(5, utilisateur.getTelephone());
-			pStmt.setString(6, utilisateur.getRue());
-			pStmt.setString(7, utilisateur.getCodePostal());
-			pStmt.setString(8, utilisateur.getVille());
+			pStmt.setString(1, utilisateur.getPseudo().toString());
+			pStmt.setString(2, utilisateur.getNom().toString());
+			pStmt.setString(3, utilisateur.getPrenom().toString());
+			pStmt.setString(4, utilisateur.getEmail().toString());
+			pStmt.setString(5, utilisateur.getTelephone().toString());
+			pStmt.setString(6, utilisateur.getRue().toString());
+			pStmt.setString(7, utilisateur.getCodePostal().toString());
+			pStmt.setString(8, utilisateur.getVille().toString());
 			pStmt.setInt(9, utilisateur.getNoUtilisateur());
 
-			int rs = pStmt.executeUpdate();
+			pStmt.executeUpdate();
 
-		        if(rs==0) {
-		            System.out.println("The project was not updated ");
-		
-		        }
-		        else {
-		            System.out.println("Project updated" + '\n'+  utilisateur.toString());
-		        }
+		     
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -35,7 +35,6 @@ public class UtilisateurManager {
 	}
 	
 	public void modifier(Utilisateur utilisateur) throws BusinessException {
-
 		utilisateurDAO.update(utilisateur);
 	}
 

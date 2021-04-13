@@ -34,19 +34,24 @@ public class ServletModifierProfil extends HttpServlet {
 		String rue = request.getParameter("rue");
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
-		
+
 		HttpSession session = request.getSession(true);    
-		int id = (int) session.getAttribute("user_id");
-		System.out.println("test2 " + id );
+		int idSession = (int) session.getAttribute("user_id");
+		String pseudoSession = (String) session.getAttribute("pseudo");
+		String emailSession = (String) session.getAttribute("email");
 		
 		if (!utilisateurManager.isPseudoAvailable(pseudo)) {
-			error = "Le pseudo existe déjà ";
+			if (pseudo == pseudoSession) {
+				error = "Le pseudo existe déjà ";
+			}
 
 		} else if (!utilisateurManager.isEmailAvailable(email)) {
-			error = "L'email existe déjà ";
+			if (email == emailSession) {
+				error = "L'email existe déjà ";
+			}
 		} 
-		
-		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, id);
+
+		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, idSession);
 
 		// Redirige vers la page inscription avec un message d'erreur
 		if (error != null) {
@@ -56,7 +61,7 @@ public class ServletModifierProfil extends HttpServlet {
 			rd.forward(request, response);
 		}
 
-		
+
 		try {
 			utilisateurManager.modifier(utilisateur);
 		} catch (Exception e) {}
