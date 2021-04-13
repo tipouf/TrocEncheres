@@ -31,7 +31,7 @@
   			<div class="col-lg-4 col-md-6 mb-4">
   				<button class="card h-100 curseurOnCard" href="${context}/ServletEnchere?id=article.noArticle">
 					<img class="card-img-top" src="http://placeimg.com/400/400/tech" alt="img">
-					<div class="card-body">
+					<div class="card-body width-center">
 						<h4 class="card-title text-center">article.nomArticle</h4>
 						<p class="card-text ml-auto"><div>article.prixVente
 					</div>
