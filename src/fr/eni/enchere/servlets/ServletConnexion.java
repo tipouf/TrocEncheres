@@ -49,8 +49,7 @@ public class ServletConnexion extends HttpServlet {
 				
 				// Ajout d'une variable de session "user_id" pour autoriser l'accès aux autres pages du site
 				request.getSession().setAttribute("user_id", utilisateurManager.getByEmailOrPseudo(emailOrPseudo).getNoUtilisateur());
-				
-				rd = request.getRequestDispatcher("/WEB-INF/index.jsp");		
+				rd = request.getRequestDispatcher("./index");		
 				
 			} else {
 				rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
