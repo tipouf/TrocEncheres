@@ -14,26 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.enchere.bll.UtilisateurManager;
 import fr.eni.enchere.bo.Utilisateur;
 
-/**
- * Servlet implementation class ServletInscription
- */
-@WebServlet("/inscription")
-public class ServletInscription extends HttpServlet {
+
+@WebServlet("/ServletModifierProfil")
+public class ServletModifierProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Page d'inscription Ã  l'application
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/UtilisateurInscription.jsp");
-		rd.forward(request, response);
-	}
-
-	/**
-	 * Tentative d'inscription d'un nouvel utilisateur
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		RequestDispatcher rd = null;
 		String error = null;
 
@@ -47,39 +33,34 @@ public class ServletInscription extends HttpServlet {
 		String rue = request.getParameter("rue");
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
-		String password = request.getParameter("motDePasse");
-		String confirmPassword = request.getParameter("confirmation");
 
-		Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+$");
-		Matcher matcher = pattern.matcher(password);
-
-		if (!password.equals(confirmPassword)) {
-			error = "Les mots de passe ne correspondent pas";
-
-		} else if (!utilisateurManager.isPseudoAvailable(pseudo)) {
+		if (!utilisateurManager.isPseudoAvailable(pseudo)) {
 			error = "Le pseudo existe déjà ";
 
 		} else if (!utilisateurManager.isEmailAvailable(email)) {
 			error = "L'email existe déjà ";
-
-		} else if (!matcher.matches()) {
-			error = "Le pseudo ne doit contenir que des caractères alphanumériques";
-		}
+		} 
+		
+		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville);
 
 		// Redirige vers la page inscription avec un message d'erreur
 		if (error != null) {
 			request.setAttribute("error", error);
-			rd = request.getRequestDispatcher("/WEB-INF/UtilisateurInscription.jsp");
+			request.setAttribute("monProfil", utilisateur);
+			rd = request.getRequestDispatcher("/WEB-INF/UtilisateurModifierProfil.jsp");
 			rd.forward(request, response);
 		}
 
-		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, utilisateurManager.encryptPassword(password), 0, false);
-
+		
 		try {
-			utilisateurManager.ajouter(utilisateur);
+			utilisateurManager.modifier(utilisateur);
 		} catch (Exception e) {}
 
-		rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
+		rd = request.getRequestDispatcher("./ServletProfil");
 		rd.forward(request, response);
+	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 }

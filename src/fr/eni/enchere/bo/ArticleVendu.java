@@ -9,25 +9,11 @@ public class ArticleVendu {
     String description;
     Date dateDebutEncheres;
     Date dateFinEncheres;
-    int prixInitial;
-    int prixVente;
+    int prixInitial = 0;
+    int prixVente = 0;
     Utilisateur proprietaire;
     Categorie categorie;
 
-
-    public ArticleVendu(String nomArticle, String description, Date dateDebutEncheres, Date dateFinEncheres,
-			int prixInitial, int prixVente, Utilisateur proprietaire, Categorie categorie) {
-		super();
-		this.nomArticle = nomArticle;
-		this.description = description;
-		this.dateDebutEncheres = dateDebutEncheres;
-		this.dateFinEncheres = dateFinEncheres;
-		this.prixInitial = prixInitial;
-		this.prixVente = prixVente;
-		this.proprietaire = proprietaire;
-		this.categorie = categorie;
-	}
-    
     public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
                         Date dateFinEncheres,int prixInitial, int prixVente, Utilisateur utilisateur, Categorie categorie) {
         super();
@@ -41,7 +27,19 @@ public class ArticleVendu {
         this.categorie 			= categorie;
     }
 
-	public int getNoArticle() {
+    public ArticleVendu(String nomArticle, String description, Date dateDebutEncheres,
+                        Date dateFinEncheres,int prixInitial, int prixVente, Utilisateur utilisateur, Categorie categorie) {
+        super();
+        this.nomArticle 		= nomArticle;
+        this.description 		= description;
+        this.dateDebutEncheres 	= dateDebutEncheres;
+        this.prixInitial 		= prixInitial;
+        this.prixVente 			= prixVente;
+        this.proprietaire 		= utilisateur;
+        this.categorie 			= categorie;
+    }
+
+    public int getNoArticle() {
         return noArticle;
     }
 

@@ -18,4 +18,6 @@ public interface UtilisateurDAO {
 	public Utilisateur getByEmailOrPseudo(String emailOrPseudo);
 	
 	public Utilisateur getByPseudo(String email);
+
+	public void update(Utilisateur utilisateur) throws BusinessException;
 }

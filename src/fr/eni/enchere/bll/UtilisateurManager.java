@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 import fr.eni.enchere.BusinessException;
+import fr.eni.enchere.bo.Retrait;
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.dal.DAOFactory;
 import fr.eni.enchere.dal.util.UtilisateurDAO;
@@ -13,22 +14,32 @@ import fr.eni.enchere.dal.util.UtilisateurDAO;
 public class UtilisateurManager {
 
 	private UtilisateurDAO utilisateurDAO;
-	
+
 	public UtilisateurManager() {
 		utilisateurDAO = DAOFactory.getUtilisateurDAO();
 	}
-	
+
 	public Utilisateur ajouter(Utilisateur utilisateur) throws BusinessException {
-		
+
 		utilisateurDAO.insert(utilisateur);
-		
+
 		return utilisateur;
 	}
-	
+
 	public Utilisateur getByEmailOrPseudo(String emailOrPseudo) {
 		return utilisateurDAO.getByEmailOrPseudo(emailOrPseudo);
 	}
+
+	public Utilisateur getById(int userId) {
+		return utilisateurDAO.getById(userId);
+	}
 	
+	public void modifier(Utilisateur utilisateur) throws BusinessException {
+
+		utilisateurDAO.update(utilisateur);
+	}
+
+
 	public boolean isPseudoAvailable(String pseudo) {
 		return (utilisateurDAO.getByPseudo(pseudo) == null);
 	}
@@ -36,40 +47,40 @@ public class UtilisateurManager {
 	public boolean isEmailAvailable(String email) {
 		return (utilisateurDAO.getByEmail(email) == null);
 	}
-	
+
 	/**
 	 * Source : https://stackoverflow.com/a/33085670
 	 *
-	 * Crypte un mot de passe en SHA-512, en utilisant le sel passÃ© en paramÃ¨tre
-	 * Cryptage suffisant pour notre appli - Sinon utiliser de meilleurs cryptages plus long Ã  casser
+	 * Crypte un mot de passe en SHA-512, en utilisant le sel passé en paramètre
+	 * Cryptage suffisant pour notre appli - Sinon utiliser de meilleurs cryptages plus long à casser
 	 *
-	 * Va gÃ©nÃ©rer un sel de hachage et l'ajouter Ã  la fin de la chaÃ®ne du mot de passe
+	 * Va générer un sel de hachage et l'ajouter à la fin de la chaîne du mot de passe
 	 */
 	public String encryptPassword(String password, String salt){
 
 		String encryptedPassword = null;
 
-	    try {
-	        MessageDigest md = MessageDigest.getInstance("SHA-256");
-	        md.update(salt.getBytes(StandardCharsets.UTF_8));
-	        byte[] bytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
-	        StringBuilder sb = new StringBuilder();
-	        for(int i=0; i< bytes.length ;i++){
-	            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-	        }
-	        encryptedPassword = sb.toString();
-	    } catch (NoSuchAlgorithmException e) {
-	        e.printStackTrace();
-	    }
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			md.update(salt.getBytes(StandardCharsets.UTF_8));
+			byte[] bytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
+			StringBuilder sb = new StringBuilder();
+			for(int i=0; i< bytes.length ;i++){
+				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+			}
+			encryptedPassword = sb.toString();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 
 		encryptedPassword = encryptedPassword.concat(salt);
 
-	    return encryptedPassword;
+		return encryptedPassword;
 	}
 
 	/**
 	 * Crypte un mot de passe en utilisant SHA-512
-	 * GÃ©nÃ¨re le sel puis appelle encryptPassword(String, String)
+	 * Génère le sel puis appelle encryptPassword(String, String)
 	 */
 	public String encryptPassword(String password) {
 
@@ -85,7 +96,7 @@ public class UtilisateurManager {
 
 	/**
 	 * Compare un mot de passe avec le mot de passe de l'utilisateur
-	 * RÃ©utilise le sel de hachage prÃ©sent Ã  la fin du mot de passe [user.getMotDePasse()]
+	 * Réutilise le sel de hachage présent à la fin du mot de passe [user.getMotDePasse()]
 	 */
 	public boolean passwordMatch(String testPassword, Utilisateur user) {
 

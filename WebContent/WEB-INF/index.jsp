@@ -85,32 +85,33 @@
 											<input type="checkbox" id="ventesEnCours" name="venteEnCours">
 											<label>Mes ventes en cours</label>
 										</div>
+									</div>
+									<div class="row">
+										<div class="col-4">
+											<input type="checkbox" id="EncheresEncours"
+												name="enchereEnCours"> <label>Mes enchères
+												en cours</label>
+										</div>
 
-										<div class="row">
-											<div class="col-4">
-												<input type="checkbox" id="EncheresEncours"
-													name="enchereEnCours"> <label>Mes enchères
-													en cours</label>
-											</div>
+										<div class="col-4">
+											<input type="checkbox" id="venteNonDebutees"
+												name="ventesNonDebutées"> <label>Ventes non
+												débutées</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-4">
+											<input type="checkbox" id="encheresRemportees"
+												name="enchereRemportees"> <label>Mes
+												enchères remportées</label>
+										</div>
 
-											<div class="col-4">
-												<input type="checkbox" id="venteNonDebutees"
-													name="ventesNonDebutées"> <label>Ventes non
-													débutées</label>
-											</div>
-											<div class="row">
-												<div class="col-4">
-													<input type="checkbox" id="encheresRemportees"
-														name="enchereRemportees"> <label>Mes
-														enchères remportées</label>
-												</div>
-
-												<div class="col-4">
-													<input type="checkbox" id="venteTerminees"
-														name="venteTerminees"> <label>Vente
-														terminées</label>
-												</div>
-											</div>
+										<div class="col-4">
+											<input type="checkbox" id="venteTerminees"
+												name="venteTerminees"> <label>Vente
+												terminées</label>
+										</div>
+									</div>
 								</c:if>
 							</form>
 						</div>

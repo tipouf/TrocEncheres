@@ -18,14 +18,13 @@ import fr.eni.enchere.bo.Utilisateur;
 @WebServlet("/connexion")
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String SALT = "salt";
 
 	/**
-	 * Page affichée lorsque l'utilisateur n'est pas connecté à l'appli
-	 * Page par défaut
+	 * Page affichÃ©e lorsque l'utilisateur n'est pas connectÃ© Ã  l'appli
+	 * Page par dÃ©faut
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
 		rd.forward(request, response);
 	}
 
@@ -47,17 +46,18 @@ public class ServletConnexion extends HttpServlet {
 			// Test du mot de passe
 			if (utilisateurManager.passwordMatch(password, utilisateur)) {
 				
-				// Ajout d'une variable de session "user_id" pour autoriser l'accès aux autres pages du site
+				// Ajout d'une variable de session "user_id" pour autoriser l'accÃ¨s aux autres pages du site
 				request.getSession().setAttribute("user_id", utilisateurManager.getByEmailOrPseudo(emailOrPseudo).getNoUtilisateur());
+				
 				rd = request.getRequestDispatcher("./index");		
 				
 			} else {
-				rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+				rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
 				request.setAttribute("error", "Mot de passe incorrect");
 			}
 
 		} else {
-			rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+			rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
 			request.setAttribute("error", "Utilisateur incorrect");
 		}
 

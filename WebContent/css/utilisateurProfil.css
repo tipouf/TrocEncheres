@@ -1,0 +1,8 @@
+body {
+	background: no-repeat url("../img/background.png");
+	background-size: cover;
+}
+
+.marginProfil {
+	margin-top:10%;
+}
