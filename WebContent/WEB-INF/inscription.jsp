@@ -22,7 +22,14 @@
 <!-- Custom styles for this template -->
 <link href="${context}/css/inscription.css" rel="stylesheet">
 
-<%@include file="entete.jsp"%>
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+
+			<a class="navbar-brand"
+				href="${pageContext.request.contextPath}/index">Enchere ENI</a>
+		</div>
+	</nav>
 </head>
 <body>
 	<div class="container jumbotron marginInscription">

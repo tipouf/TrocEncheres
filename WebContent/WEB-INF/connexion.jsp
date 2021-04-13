@@ -26,8 +26,15 @@
 <!-- Custom styles for this template -->
 <link href="${context}/css/connexion.css"
 	rel="stylesheet">
+	
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
 
-<%@include file="entete.jsp"%>
+			<a class="navbar-brand"
+				href="${pageContext.request.contextPath}/index">Enchere ENI</a>
+		</div>
+	</nav>
 </head>
 <body>
 	<div class="container jumbotron marginConnexion">
