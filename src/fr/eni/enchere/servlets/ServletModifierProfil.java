@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.enchere.bll.UtilisateurManager;
 import fr.eni.enchere.bo.Utilisateur;
@@ -33,7 +34,11 @@ public class ServletModifierProfil extends HttpServlet {
 		String rue = request.getParameter("rue");
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
-
+		
+		HttpSession session = request.getSession(true);    
+		int id = (int) session.getAttribute("user_id");
+		System.out.println("test2 " + id );
+		
 		if (!utilisateurManager.isPseudoAvailable(pseudo)) {
 			error = "Le pseudo existe déjà ";
 
@@ -41,7 +46,7 @@ public class ServletModifierProfil extends HttpServlet {
 			error = "L'email existe déjà ";
 		} 
 		
-		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville);
+		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, id);
 
 		// Redirige vers la page inscription avec un message d'erreur
 		if (error != null) {

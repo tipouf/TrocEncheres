@@ -32,7 +32,7 @@ public class Utilisateur {
 	}
 	
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville) {
+			String codePostal, String ville, int noUtilisateur) {
 		super();
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -42,6 +42,7 @@ public class Utilisateur {
 		this.rue = rue;
 		this.codePostal = codePostal;
 		this.ville = ville;
+		this.noUtilisateur = noUtilisateur;
 	}
 
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
