@@ -26,7 +26,6 @@ public class ServletModifierProfil extends HttpServlet {
 		String error = null;
 
 		String enregistrer = "enregistrer";
-		String supprimer = "enregistrer";
 
 		HttpSession session = request.getSession(true);    
 		int idSession = (int) session.getAttribute("user_id");
@@ -44,10 +43,9 @@ public class ServletModifierProfil extends HttpServlet {
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
 
-		System.out.println("fonction => " + fonction);
-
-		if (fonction.trim().equalsIgnoreCase(enregistrer.trim())) {
-			System.out.println("i am here");
+		
+		if (fonction.equalsIgnoreCase("enregistrer")) {
+			//verifie si le pseudo a changé et si il est dispo
 			if (!utilisateur.getPseudo().equalsIgnoreCase(pseudo)) {
 				if (!utilisateurManager.isPseudoAvailable(pseudo)) {
 					error = "Le pseudo existe déjà ";
@@ -55,6 +53,8 @@ public class ServletModifierProfil extends HttpServlet {
 					utilisateur.setPseudo(pseudo);
 				}
 			}
+			
+			//verifie si le mail a changé et si il est dispo
 			if (!utilisateur.getEmail().equalsIgnoreCase(email)) {
 				if(!utilisateurManager.isEmailAvailable(email)) {
 					error = "L'email existe déjà ";
@@ -71,7 +71,6 @@ public class ServletModifierProfil extends HttpServlet {
 				rd.forward(request, response);
 			}
 
-			
 			utilisateur.setNom(nom);
 			utilisateur.setPrenom(prenom);
 			utilisateur.setTelephone(telephone);
@@ -87,12 +86,9 @@ public class ServletModifierProfil extends HttpServlet {
 
 			rd = request.getRequestDispatcher("./ServletProfil");
 			rd.forward(request, response);
-
 		}
 
-
 		if (fonction.equalsIgnoreCase("supprimer")) {
-			System.out.println("je suppr");
 			try {
 				utilisateurManager.delete(idSession);
 			        session.invalidate();
@@ -101,8 +97,6 @@ public class ServletModifierProfil extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
-
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

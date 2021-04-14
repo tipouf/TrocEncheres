@@ -23,9 +23,6 @@ public class ServletProfil extends HttpServlet {
 
 		int id = (int) session.getAttribute("user_id");
 		UtilisateurManager monprofil = new UtilisateurManager();
-
-		System.out.println(id);
-
 		Utilisateur utilisateur = monprofil.getById(id);
 
 		if (modification == null ) {

@@ -21,4 +21,8 @@ public class CategorieManager {
     public Categorie getById(int id) throws BusinessException {
         return categorieDAO.getById(id);
     }
+    
+    public int getByLibelle(String libelle) throws BusinessException {
+        return categorieDAO.getByLibelle(libelle);
+    }
 }

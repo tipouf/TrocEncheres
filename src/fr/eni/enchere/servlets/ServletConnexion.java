@@ -20,8 +20,8 @@ public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Page affichÃ©e lorsque l'utilisateur n'est pas connectÃ© Ã  l'appli
-	 * Page par dÃ©faut
+	 * Page affichée lorsque l'utilisateur n'est pas connecté à l'appli
+	 * Page par défaut
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
@@ -46,10 +46,9 @@ public class ServletConnexion extends HttpServlet {
 			// Test du mot de passe
 			if (utilisateurManager.passwordMatch(password, utilisateur)) {
 				
-				// Ajout d'une variable de session "user_id" pour autoriser l'accÃ¨s aux autres pages du site
+				// Ajout d'une variable de session "user_id" pour autoriser l'accès aux autres pages du site
 				request.getSession().setAttribute("user_id", utilisateurManager.getByEmailOrPseudo(emailOrPseudo).getNoUtilisateur());
-				request.getSession().setAttribute("pseudo", utilisateurManager.getByEmailOrPseudo(emailOrPseudo).getPseudo());
-				request.getSession().setAttribute("email", utilisateurManager.getByEmailOrPseudo(emailOrPseudo).getEmail());
+				
 				rd = request.getRequestDispatcher("./index");		
 				
 			} else {

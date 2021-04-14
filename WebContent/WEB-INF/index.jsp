@@ -27,99 +27,46 @@
 </head>
 <body>
 
-
 	<!-- Page Content -->
+
 	<div class="container">
+		<div class="d-flex justify-content-center mt-5">
+			<img src="${context}/img/logo.png">
+		</div>
 
 		<!-- Jumbotron Header -->
 		<div class="jumbotron my-4">
-			<h1 class="display-3 text-center">Liste des enchères</h1>
-			<div class="col-md-9 col-md-push-1 ">
 
-				<div class="container">
-					<h3>Filtres:</h3>
-					<div class="row flex-d">
-						<div class="col-xs-8 col-xs-offset-2">
-							<form action="./rechercheVente" method="post">
-								<div class="input-group">
-									<div class="input-group-btn search-panel">
-										<select class="btn btn-default dropdown-toggle"
-											data-toggle="dropdown">
-											<option value="toute">Toutes</option>
-											<c:forEach items="${listeCategories}" var="item">
-												<option value="${item.libelle}">${item.libelle}</option>
-											</c:forEach>
-										</select>
-									</div>
-
-									<input type="text" class="form-control " name="x"
-										placeholder="Le nom de l'article contient"> <span
-										class="input-group-btn">
-										<button class="btn btn-default " type="button">
-											<span class="glyphicon glyphicon-search"></span>
-										</button>
-									</span> <a href="#" class="btn btn-primary btn-lg">Rechercher</a>
+			<div class="container">
+				<h3>Filtres:</h3>
+				<div class="row flex-d">
+					<div class="col-xs-8 col-xs-offset-2">
+						<form action="./index" method="post">
+							<div class="input-group">
+								<div class="input-group-btn search-panel">
+									<select class="btn btn-default dropdown-toggle"
+										data-toggle="dropdown" name="categorie">
+										<option value="toute">Toutes</option>
+										<c:forEach items="${listeCategories}" var="item">
+											<option value="${item.libelle}"
+												${item.libelle == categorieSelectionnee ? 'selected="selected"' : ''}>${item.libelle}</option>
+										</c:forEach>
+									</select>
 								</div>
 
-								<c:if test="${sessionScope.user_id != null}">
-									<div class="row">
-										<div class="col-4 mt-2">
-											<input checked class="form-check-input " type="radio"
-												id="achat" name="selectionFiltreAchats"> <label>Mes
-												achats</label>
-										</div>
-										<div class="col-4 mt-2">
-											<input class="form-check-input " type="radio" id="ventes"
-												name="selectionFiltreVentes"> <label>Mes
-												ventes</label>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-4">
-											<input type="checkbox" id="encheresOuvertes"
-												name="enchereOuvertes"> <label>Encheres
-												ouvertes</label>
-										</div>
-
-										<div class="col-4">
-											<input type="checkbox" id="ventesEnCours" name="venteEnCours">
-											<label>Mes ventes en cours</label>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-4">
-											<input type="checkbox" id="EncheresEncours"
-												name="enchereEnCours"> <label>Mes enchères
-												en cours</label>
-										</div>
-
-										<div class="col-4">
-											<input type="checkbox" id="venteNonDebutees"
-												name="ventesNonDebutées"> <label>Ventes non
-												débutées</label>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-4">
-											<input type="checkbox" id="encheresRemportees"
-												name="enchereRemportees"> <label>Mes
-												enchères remportées</label>
-										</div>
-
-										<div class="col-4">
-											<input type="checkbox" id="venteTerminees"
-												name="venteTerminees"> <label>Vente
-												terminées</label>
-										</div>
-									</div>
-								</c:if>
-							</form>
-						</div>
+								<input type="text" class="form-control " name="inputRecherche"
+									value="${inputRecherche}"
+									placeholder="Le nom de l'article contient"> <input
+									type="submit" class="btn btn-primary" id="boutonRecherche"
+									name="recherche" value="Rechercher" />
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 
 	<%@include file="listeVente.jsp"%>
 

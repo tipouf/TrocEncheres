@@ -7,11 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import fr.eni.enchere.BusinessException;
-import fr.eni.enchere.bo.Retrait;
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.dal.ConnectionProvider;
-
-import javax.rmi.CORBA.Util;
 
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
@@ -60,7 +57,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		  + "WHERE email LIKE ? OR pseudo LIKE ?;";
 
 	private static final String DELETE =
-			"DELETE FROM UTILISATEURS " +
+			"DELETE FROM UTILISATEURS" +
 			"WHERE no_utilisateur = ?;";
 	
 	@Override
@@ -100,6 +97,29 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throw be;
 		}
 	}
+
+	@Override
+	public void update(Utilisateur utilisateur) {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+
+			PreparedStatement pStmt = cnx.prepareStatement(UPDATE);
+			pStmt.setString(1, utilisateur.getPseudo().toString());
+			pStmt.setString(2, utilisateur.getNom().toString());
+			pStmt.setString(3, utilisateur.getPrenom().toString());
+			pStmt.setString(4, utilisateur.getEmail().toString());
+			pStmt.setString(5, utilisateur.getTelephone().toString());
+			pStmt.setString(6, utilisateur.getRue().toString());
+			pStmt.setString(7, utilisateur.getCodePostal().toString());
+			pStmt.setString(8, utilisateur.getVille().toString());
+			pStmt.setInt(9, utilisateur.getNoUtilisateur());
+
+			pStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}	
+
 
 	@Override
 	public ArrayList<Utilisateur> getAll() {
@@ -236,30 +256,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		
 		return utilisateur;
-	}
-
-	public void update(Utilisateur utilisateur) {
-
-		try(Connection cnx = ConnectionProvider.getConnection()) {
-
-			PreparedStatement pStmt = cnx.prepareStatement(UPDATE);
-			pStmt.setString(1, utilisateur.getPseudo().toString());
-			pStmt.setString(2, utilisateur.getNom().toString());
-			pStmt.setString(3, utilisateur.getPrenom().toString());
-			pStmt.setString(4, utilisateur.getEmail().toString());
-			pStmt.setString(5, utilisateur.getTelephone().toString());
-			pStmt.setString(6, utilisateur.getRue().toString());
-			pStmt.setString(7, utilisateur.getCodePostal().toString());
-			pStmt.setString(8, utilisateur.getVille().toString());
-			pStmt.setString(9, utilisateur.getMotDePasse().toString());
-			pStmt.setInt(10, utilisateur.getCredit());
-			pStmt.setBoolean(11, utilisateur.isAdministrateur());
-			pStmt.setInt(12, utilisateur.getNoUtilisateur());
-			pStmt.executeUpdate();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 	
 	private Utilisateur parseResultRow(ResultSet rs) {

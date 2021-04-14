@@ -1,6 +1,7 @@
 body {
-	background: no-repeat url("../img/background.png");
+
 	background-size: cover;
+	background-color: #3a444f;
 }
 
 .margin-index {
