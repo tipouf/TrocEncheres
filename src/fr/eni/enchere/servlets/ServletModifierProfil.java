@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.enchere.BusinessException;
 import fr.eni.enchere.bll.UtilisateurManager;
 import fr.eni.enchere.bo.Utilisateur;
 
@@ -24,8 +25,16 @@ public class ServletModifierProfil extends HttpServlet {
 		RequestDispatcher rd = null;
 		String error = null;
 
-		UtilisateurManager utilisateurManager = new UtilisateurManager();
+		String enregistrer = "enregistrer";
+		String supprimer = "enregistrer";
 
+		HttpSession session = request.getSession(true);    
+		int idSession = (int) session.getAttribute("user_id");
+
+		UtilisateurManager utilisateurManager = new UtilisateurManager();
+		Utilisateur utilisateur = utilisateurManager.getById(idSession);
+
+		String fonction = request.getParameter("fonction");
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -35,46 +44,68 @@ public class ServletModifierProfil extends HttpServlet {
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
 
-		HttpSession session = request.getSession(true);    
-		int idSession = (int) session.getAttribute("user_id");
-		String pseudoSession = (String) session.getAttribute("pseudo");
-		String emailSession = (String) session.getAttribute("email");
+		System.out.println("fonction => " + fonction);
 
-		
-		System.out.println("pseudo " + pseudo);
-		System.out.println("pseudoSession " + pseudoSession);
-		if (!pseudo.equalsIgnoreCase(pseudoSession) ) {
-			if (!utilisateurManager.isPseudoAvailable(pseudo)) {
-
-				error = "Le pseudo existe déjà ";
+		if (fonction.trim().equalsIgnoreCase(enregistrer.trim())) {
+			System.out.println("i am here");
+			if (!utilisateur.getPseudo().equalsIgnoreCase(pseudo)) {
+				if (!utilisateurManager.isPseudoAvailable(pseudo)) {
+					error = "Le pseudo existe déjà ";
+				} else {
+					utilisateur.setPseudo(pseudo);
+				}
+			}
+			if (!utilisateur.getEmail().equalsIgnoreCase(email)) {
+				if(!utilisateurManager.isEmailAvailable(email)) {
+					error = "L'email existe déjà ";
+				} else {
+					utilisateur.setEmail(email);
+				}
 			}
 
-		} else if (!email.equalsIgnoreCase(emailSession)) {
-			if(!utilisateurManager.isEmailAvailable(email)) {
+			// Redirige vers la page inscription avec un message d'erreur
+			if (error != null && fonction.equalsIgnoreCase("enregistrer")) {
+				request.setAttribute("error", error);
+				request.setAttribute("monProfil", utilisateur);
+				rd = request.getRequestDispatcher("/WEB-INF/UtilisateurModifierProfil.jsp");
+				rd.forward(request, response);
 			}
-			error = "L'email existe déjà ";
+
+			
+			utilisateur.setNom(nom);
+			utilisateur.setPrenom(prenom);
+			utilisateur.setTelephone(telephone);
+			utilisateur.setRue(rue);
+			utilisateur.setCodePostal(codePostal);
+			utilisateur.setVille(ville);
+
+			try {
+				utilisateurManager.update(utilisateur);
+			} catch (Exception e) {
+				error = "probleme survenu durant l'enregistrement";
+			}
+
+			rd = request.getRequestDispatcher("./ServletProfil");
+			rd.forward(request, response);
+
 		}
 
-	Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, idSession);
-	System.out.println("utilisateur " + utilisateur);
-	// Redirige vers la page inscription avec un message d'erreur
-	if (error != null) {
-		request.setAttribute("error", error);
-		request.setAttribute("monProfil", utilisateur);
-		rd = request.getRequestDispatcher("/WEB-INF/UtilisateurModifierProfil.jsp");
-		rd.forward(request, response);
+
+		if (fonction.equalsIgnoreCase("supprimer")) {
+			System.out.println("je suppr");
+			try {
+				utilisateurManager.delete(idSession);
+			        session.invalidate();
+			        response.sendRedirect(request.getContextPath() + "/index");
+			} catch (BusinessException e) {
+				e.printStackTrace();
+			}
+		}
+
+
 	}
-
-
-	try {
-		utilisateurManager.modifier(utilisateur);
-	} catch (Exception e) {}
-
-	rd = request.getRequestDispatcher("./ServletProfil");
-	rd.forward(request, response);
-}
-protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	// TODO Auto-generated method stub
-	doGet(request, response);
-}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
 }

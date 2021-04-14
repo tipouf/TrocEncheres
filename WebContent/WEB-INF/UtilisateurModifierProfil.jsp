@@ -95,9 +95,13 @@
 					<%
                     }
                 %>
-					<div class="bouton text-center mt-3">
-						<button type="submit" class="btn btn-danger float-end">Enregistrer</button>
+                <div class="bouton text-center ">
+						<button type="submit" name="fonction" value="enregistrer" class="btn btn-primary float-end">Enregistrer</button>
 					</div>
+                	<div class="bouton text-center">
+						<button type="submit" name="fonction" value="supprimer" class="btn btn-danger float-end margin-button">Supprimer</button>
+					</div>
+					
 				</form>
 			</div>
 		</div>

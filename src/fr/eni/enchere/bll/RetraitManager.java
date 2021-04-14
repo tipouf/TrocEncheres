@@ -25,7 +25,7 @@ public class RetraitManager {
 
 	public void effacer(Retrait retrait) throws BusinessException {
 
-		retraitDAO.delete(retrait);;
+		retraitDAO.delete(retrait);
 	}
 
 	public Retrait getById(int noArticle) throws BusinessException {

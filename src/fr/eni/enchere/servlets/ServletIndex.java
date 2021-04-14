@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.enchere.BusinessException;
+import fr.eni.enchere.bll.ArticleVenduManager;
+import fr.eni.enchere.bll.CategorieManager;
+import fr.eni.enchere.bll.UtilisateurManager;
 import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.bo.Categorie;
 import fr.eni.enchere.dal.DAOFactory;
@@ -21,19 +24,19 @@ public class ServletIndex extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		CategorieManager categorieManager = new CategorieManager();
+		ArticleVenduManager articleManager = new ArticleVenduManager();
 		try {
-			ArrayList<Categorie> listeCategories = (ArrayList<Categorie>) DAOFactory.getCategorieDAO().getAll();
-			ArrayList<ArticleVendu> listeArticles = (ArrayList<ArticleVendu>) DAOFactory.getArticleVenduDAO().getAll();
+			ArrayList<Categorie> listeCategories = categorieManager.getAll()  ;
+			ArrayList<ArticleVendu> listeArticles = (ArrayList<ArticleVendu>) articleManager.afficherArticles() ;
 
 			request.setAttribute("listeCategories", listeCategories);
 			request.setAttribute("listeArticles", listeArticles);
 
-//			System.out.println(listeArticles.get(0).getDateFinEncheres());
-
 		} catch (BusinessException e) {
 			System.err.println(e.getMessage());
 		}
-
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
 		rd.forward(request, response);
 	}

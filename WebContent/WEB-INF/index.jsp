@@ -46,8 +46,8 @@
 										<select class="btn btn-default dropdown-toggle"
 											data-toggle="dropdown">
 											<option value="toute">Toutes</option>
-											<c:forEach items="${categorie}" var="item">
-												<option value="${item}">${item}</option>
+											<c:forEach items="${listeCategories}" var="item">
+												<option value="${item.libelle}">${item.libelle}</option>
 											</c:forEach>
 										</select>
 									</div>
