@@ -240,7 +240,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 
 			PreparedStatement pStmt = cnx.prepareStatement(UPDATE);
-
 			pStmt.setString(1, utilisateur.getPseudo().toString());
 			pStmt.setString(2, utilisateur.getNom().toString());
 			pStmt.setString(3, utilisateur.getPrenom().toString());

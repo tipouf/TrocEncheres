@@ -39,38 +39,42 @@ public class ServletModifierProfil extends HttpServlet {
 		int idSession = (int) session.getAttribute("user_id");
 		String pseudoSession = (String) session.getAttribute("pseudo");
 		String emailSession = (String) session.getAttribute("email");
+
 		
-		if (!utilisateurManager.isPseudoAvailable(pseudo)) {
-			if (pseudo == pseudoSession) {
+		System.out.println("pseudo " + pseudo);
+		System.out.println("pseudoSession " + pseudoSession);
+		if (!pseudo.equalsIgnoreCase(pseudoSession) ) {
+			if (!utilisateurManager.isPseudoAvailable(pseudo)) {
+
 				error = "Le pseudo existe déjà ";
 			}
 
-		} else if (!utilisateurManager.isEmailAvailable(email)) {
-			if (email == emailSession) {
-				error = "L'email existe déjà ";
+		} else if (!email.equalsIgnoreCase(emailSession)) {
+			if(!utilisateurManager.isEmailAvailable(email)) {
 			}
-		} 
-
-		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, idSession);
-
-		// Redirige vers la page inscription avec un message d'erreur
-		if (error != null) {
-			request.setAttribute("error", error);
-			request.setAttribute("monProfil", utilisateur);
-			rd = request.getRequestDispatcher("/WEB-INF/UtilisateurModifierProfil.jsp");
-			rd.forward(request, response);
+			error = "L'email existe déjà ";
 		}
 
-
-		try {
-			utilisateurManager.modifier(utilisateur);
-		} catch (Exception e) {}
-
-		rd = request.getRequestDispatcher("./ServletProfil");
+	Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, idSession);
+	System.out.println("utilisateur " + utilisateur);
+	// Redirige vers la page inscription avec un message d'erreur
+	if (error != null) {
+		request.setAttribute("error", error);
+		request.setAttribute("monProfil", utilisateur);
+		rd = request.getRequestDispatcher("/WEB-INF/UtilisateurModifierProfil.jsp");
 		rd.forward(request, response);
 	}
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+
+
+	try {
+		utilisateurManager.modifier(utilisateur);
+	} catch (Exception e) {}
+
+	rd = request.getRequestDispatcher("./ServletProfil");
+	rd.forward(request, response);
+}
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	// TODO Auto-generated method stub
+	doGet(request, response);
+}
 }
