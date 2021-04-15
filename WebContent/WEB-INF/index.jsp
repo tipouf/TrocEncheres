@@ -1,17 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
-
-<!-- Custom styles for this template -->
-<link href="${context}/css/index.css" rel="stylesheet">
-
 <div class="d-flex justify-content-center mt-5">
     <img src="${context}/img/logo.png">
 </div>
 
-<!-- Jumbotron Header -->
-<div class="jumbotron my-4">
-    <div class="container">
+<div class="card my-4">
+    <div class="card-body bg-light-grey">
         <h3>Filtres:</h3>
         <div class="row flex-d">
             <div class="col-xs-8 col-xs-offset-2">

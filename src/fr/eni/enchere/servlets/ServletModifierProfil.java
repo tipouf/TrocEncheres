@@ -62,7 +62,8 @@ public class ServletModifierProfil extends HttpServlet {
 			if (error != null && fonction.equalsIgnoreCase("enregistrer")) {
 				request.setAttribute("error", error);
 				request.setAttribute("monProfil", utilisateur);
-				rd = request.getRequestDispatcher("/WEB-INF/UtilisateurModifierProfil.jsp");
+				rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
+				request.setAttribute("pageAAfficher", "/WEB-INF/UtilisateurModifierProfil.jsp");
 				rd.forward(request, response);
 			}
 

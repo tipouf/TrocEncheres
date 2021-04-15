@@ -17,59 +17,67 @@
         </div>
         <div class="row">
             <div class="col-2">
-                <label for="lastName" class="fw-bold">Nom:</label>
+                <label for="nom" class="fw-bold">Nom:</label>
             </div>
             <div class="col-8">
-                <label for="lastName">${monProfil.nom}</label>
+                <label for="nom">${monProfil.nom}</label>
             </div>
         </div>
         <div class="row">
             <div class="col-2">
-                <label for="lastName" class="fw-bold">Prénom:</label>
+                <label for="prenom" class="fw-bold">Prénom:</label>
             </div>
             <div class="col-8">
-                <label for="lastName">${monProfil.prenom}</label>
+                <label for="prenom">${monProfil.prenom}</label>
             </div>
         </div>
         <div class="row">
             <div class="col-2">
-                <label for="lastName" class="fw-bold">Email:</label>
+                <label for="email" class="fw-bold">Email:</label>
             </div>
             <div class="col-8">
-                <label for="lastName">${monProfil.email}</label>
+                <label for="email">${monProfil.email}</label>
             </div>
         </div>
         <div class="row">
             <div class="col-2">
-                <label for="lastName" class="fw-bold">Téléphone:</label>
+                <label for="telephone" class="fw-bold">Téléphone:</label>
             </div>
             <div class="col-8">
-                <label for="lastName">${monProfil.telephone}</label>
+                <label for="telephone">${monProfil.telephone}</label>
             </div>
         </div>
         <div class="row">
             <div class="col-2">
-                <label for="lastName" class="fw-bold">Rue:</label>
+                <label for="rue" class="fw-bold">Rue:</label>
             </div>
             <div class="col-8">
-                <label for="lastName">${monProfil.rue}</label>
+                <label for="rue">${monProfil.rue}</label>
             </div>
         </div>
         <div class="row">
             <div class="col-2">
-                <label for="lastName" class="fw-bold">Code postal:</label>
+                <label for="codepostal" class="fw-bold">Code postal:</label>
 
             </div>
             <div class="col-8">
-                <label for="lastName">${monProfil.codePostal}</label>
+                <label for="codepostal">${monProfil.codePostal}</label>
             </div>
         </div>
         <div class="row">
             <div class="col-2">
-                <label for="lastName" class="fw-bold">Ville:</label>
+                <label for="ville" class="fw-bold">Ville:</label>
             </div>
             <div class="col-8">
-                <label for="lastName">${monProfil.ville}</label>
+                <label for="ville">${monProfil.ville}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <label for="lastName" class="fw-bold">Crédit(s):</label>
+            </div>
+            <div class="col-8">
+                <label for="lastName">${monProfil.credit} point(s)</label>
             </div>
         </div>
         <div class="clearfix mt-3 login-buttons">

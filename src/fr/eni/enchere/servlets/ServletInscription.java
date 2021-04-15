@@ -67,7 +67,7 @@ public class ServletInscription extends HttpServlet {
             error = "Le pseudo ne doit contenir que des caractères alphanumériques";
 
         } else {
-            Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, utilisateurManager.encryptPassword(password), 0, false);
+            Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, utilisateurManager.encryptPassword(password), 1000, false);
 
             try {
                 utilisateurManager.ajouter(utilisateur);
