@@ -1,13 +1,12 @@
 package fr.eni.enchere.bll;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import fr.eni.enchere.BusinessException;
 import fr.eni.enchere.bo.ArticleVendu;
-import fr.eni.enchere.bo.Categorie;
 import fr.eni.enchere.dal.DAOFactory;
 import fr.eni.enchere.dal.articleVendu.ArticleVenduDAO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArticleVenduManager {
     ArticleVenduDAO articleVenduDAO = DAOFactory.getArticleVenduDAO();
@@ -67,15 +66,15 @@ public class ArticleVenduManager {
         return articleVenduDAO.getById(id);
     }
 
-	public List<ArticleVendu> filtreParTitre(String recherche) throws BusinessException {
+    public List<ArticleVendu> filtreParTitre(String recherche) {
 		return articleVenduDAO.filtreParTitre(recherche);
 	}
 
-	public List<ArticleVendu> filtreParCategorie(int noCategorie) throws BusinessException {
+	public List<ArticleVendu> filtreParCategorie(int noCategorie) {
 		return articleVenduDAO.filtreParCategorie(noCategorie);
 	}
 	
-	public List<ArticleVendu> filtreParRechercheEtCategorie(String recherche, int noCategorie) throws BusinessException {
+	public List<ArticleVendu> filtreParRechercheEtCategorie(String recherche, int noCategorie) {
 		return articleVenduDAO.filtreParRechercheEtCategorie(recherche, noCategorie);
 	}
 }

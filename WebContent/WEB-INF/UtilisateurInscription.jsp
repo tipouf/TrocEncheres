@@ -1,29 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 
 <%
     String error = (String) request.getAttribute("error");
 %>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Page de connexion</title>
     <c:set var="context" value="${pageContext.request.contextPath}"/>
-    <!-- Bootstrap core CSS -->
-    <link href="${context}/vendor/bootstrap/css/bootstrap.min.css"
-          rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="${context}/css/inscription.css" rel="stylesheet">
-</head>
-<body>
-<%@include file="entete.jsp" %>
-<div class="container jumbotron marginInscription">
-    <h1 class="display-4 text-left">CrÃ©er profil</h1>
+
+<div class="card mt-5">
+    <div class="card-header">
+        <h1 class="card-title">Créer profil</h1>
+    </div>
     <div class="card-body">
         <form action="<%=request.getContextPath()%>/inscription"
               method="post">
@@ -42,10 +30,10 @@
             </div>
 
             <div class="form-group row mt-2">
-                <label for="firstName" class="col-sm-2 col-form-label">PrÃ©nom:</label>
+                <label for="firstName" class="col-sm-2 col-form-label">Prénom:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" name="prenom"
-                           placeholder="PrÃ©nom" required>
+                           placeholder="Prénom" required>
                 </div>
                 <label for="contact" class="col-sm-2 col-form-label">Email:</label>
                 <div class="col-sm-4">
@@ -55,10 +43,10 @@
             </div>
 
             <div class="form-group row mt-2">
-                <label for="contact" class="col-sm-2 col-form-label">TÃ©lÃ©phone:</label>
+                <label for="contact" class="col-sm-2 col-form-label">Téléphone:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" name="telephone"
-                           placeholder="TÃ©lÃ©phone">
+                           placeholder="Téléphone">
                 </div>
                 <label for="contact" class="col-sm-2 col-form-label">Rue:</label>
                 <div class="col-sm-4">
@@ -99,18 +87,19 @@
             <span class="text-danger"><%= error %></span>
             <% } %>
 
-            <div class="bouton text-center mt-3">
-                <button type="submit" class="btn btn-primary">CrÃ©er</button>
+            <div class="row mt-3">
+                <div class="col-6 text-start">
+                    <button class="btn btn-danger" onclick="window.location='${pageContext.request.contextPath}/index';return false;">Annuler</button>
+                </div>
+                <div class="col-6 text-end">
+                    <button class="btn btn-info" onclick="window.location='${pageContext.request.contextPath}/connexion';return false;">
+                        Se connecter
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                            Créer
+                    </button>
+                </div>
             </div>
         </form>
-        <button class="btn btn-primary"
-                onclick="${pageContext.request.contextPath}/login">Annuler
-        </button>
     </div>
 </div>
-
-<!-- Bootstrap core JavaScript -->
-<script src="${context}/vendor/jquery/jquery.min.js"></script>
-<script src="${context}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>

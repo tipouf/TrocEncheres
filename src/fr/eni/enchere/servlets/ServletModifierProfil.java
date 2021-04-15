@@ -1,8 +1,6 @@
 package fr.eni.enchere.servlets;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,21 +41,18 @@ public class ServletModifierProfil extends HttpServlet {
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
 
-		
-		if (fonction.equalsIgnoreCase("enregistrer")) {
-			//verifie si le pseudo a changé et si il est dispo
+
+		if (fonction.trim().equalsIgnoreCase(enregistrer.trim())) {
 			if (!utilisateur.getPseudo().equalsIgnoreCase(pseudo)) {
 				if (!utilisateurManager.isPseudoAvailable(pseudo)) {
-					error = "Le pseudo existe déjà ";
+					error = "Le pseudo existe déjà";
 				} else {
 					utilisateur.setPseudo(pseudo);
 				}
 			}
-			
-			//verifie si le mail a changé et si il est dispo
 			if (!utilisateur.getEmail().equalsIgnoreCase(email)) {
 				if(!utilisateurManager.isEmailAvailable(email)) {
-					error = "L'email existe déjà ";
+					error = "L'email existe déjà";
 				} else {
 					utilisateur.setEmail(email);
 				}
@@ -71,6 +66,7 @@ public class ServletModifierProfil extends HttpServlet {
 				rd.forward(request, response);
 			}
 
+			
 			utilisateur.setNom(nom);
 			utilisateur.setPrenom(prenom);
 			utilisateur.setTelephone(telephone);
@@ -86,7 +82,9 @@ public class ServletModifierProfil extends HttpServlet {
 
 			rd = request.getRequestDispatcher("./ServletProfil");
 			rd.forward(request, response);
+
 		}
+
 
 		if (fonction.equalsIgnoreCase("supprimer")) {
 			try {
@@ -97,6 +95,8 @@ public class ServletModifierProfil extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+
+
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

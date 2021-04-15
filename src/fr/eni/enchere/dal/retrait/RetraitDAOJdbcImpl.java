@@ -30,7 +30,6 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 
 			try {
 				PreparedStatement pStmt = cnx.prepareStatement(INSERT);
-				cnx.setAutoCommit(false);
 				pStmt.setInt(1, retrait.getNoArticle());
 				pStmt.setString(2, retrait.getRue());
 				pStmt.setString(3, retrait.getCodePostal());
@@ -38,12 +37,8 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 
 				pStmt.executeUpdate();
 
-				cnx.commit();
-
 			} catch (SQLException e) {
 				e.printStackTrace();
-
-				cnx.rollback();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -56,6 +51,8 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 		try(Connection cnx = ConnectionProvider.getConnection()) {
 
 			PreparedStatement pstmt = cnx.prepareStatement(GET_BY_ID);
+			pstmt.setInt(1, noArticle);
+
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				retrait = new Retrait(
@@ -91,16 +88,16 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 
 	@Override
 	public void delete(Retrait retrait) throws BusinessException {
-		try (Connection cnx = ConnectionProvider.getConnection()) {
+	    try (Connection cnx = ConnectionProvider.getConnection()) {
 
-			PreparedStatement pStmt = cnx.prepareStatement(DELETE);
-			pStmt.setInt(1, retrait.getNoArticle());
+            PreparedStatement pStmt = cnx.prepareStatement(DELETE);
+            pStmt.setInt(1, retrait.getNoArticle());
 
-			pStmt.executeUpdate();
+            pStmt.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 	}
 }

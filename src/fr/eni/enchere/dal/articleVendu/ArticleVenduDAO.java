@@ -12,7 +12,7 @@ public interface ArticleVenduDAO {
     public void insert(ArticleVendu articleVendu) throws BusinessException;
     public void update(ArticleVendu articleVendu) throws BusinessException;
     public void delete(ArticleVendu articleVendu) throws BusinessException;
-    public List<ArticleVendu> filtreParCategorie(int noCategorie) throws BusinessException;
-    public List<ArticleVendu> filtreParTitre(String recherche) throws BusinessException;
-	public List<ArticleVendu> filtreParRechercheEtCategorie(String recherche, int noCategorie) throws BusinessException;
+    public List<ArticleVendu> filtreParCategorie(int noCategorie);
+    public List<ArticleVendu> filtreParTitre(String recherche);
+	public List<ArticleVendu> filtreParRechercheEtCategorie(String recherche, int noCategorie);
 }

@@ -15,7 +15,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String INSERT = 
 			"INSERT INTO UTILISATEURS(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) "
 		  + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-
+	
 	private static final String UPDATE =
 			"UPDATE UTILISATEURS " +
 			"SET " +
@@ -97,7 +97,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throw be;
 		}
 	}
-
+	
 	@Override
 	public void update(Utilisateur utilisateur) {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -111,7 +111,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pStmt.setString(6, utilisateur.getRue().toString());
 			pStmt.setString(7, utilisateur.getCodePostal().toString());
 			pStmt.setString(8, utilisateur.getVille().toString());
-			pStmt.setInt(9, utilisateur.getNoUtilisateur());
+			pStmt.setString(9, utilisateur.getMotDePasse().toString());
+			pStmt.setInt(10, utilisateur.getCredit());
+			pStmt.setBoolean(11, utilisateur.isAdministrateur());
+			pStmt.setInt(12, utilisateur.getNoUtilisateur());
 
 			pStmt.executeUpdate();
 

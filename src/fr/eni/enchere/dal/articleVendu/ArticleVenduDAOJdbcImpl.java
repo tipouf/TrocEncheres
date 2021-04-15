@@ -1,176 +1,181 @@
 package fr.eni.enchere.dal.articleVendu;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
 import fr.eni.enchere.BusinessException;
 import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.dal.ConnectionProvider;
 import fr.eni.enchere.dal.DAOFactory;
 
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
-	private static final String GET_ALL = "SELECT * FROM ARTICLES_VENDUS";
+    private static final String GET_ALL = "SELECT * FROM ARTICLES_VENDUS";
 
-	private static final String GET_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article =?";
+    private static final String GET_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article =?";
 
-	private static final String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
+    private static final String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
 
-	private static final String INSERT = "INSERT INTO ARTICLES_VENDUS(nom_article,"
-			+ "description,"
-			+ "date_debut_encheres,"
-			+ "date_fin_encheres,"
-			+ "prix_initial,"
-			+ "prix_vente,"
-			+ "no_utilisateur,"
-			+ "no_categorie) VALUES(?,?,?,?,?,?,?,?)";
+    private static final String INSERT = "INSERT INTO ARTICLES_VENDUS(nom_article,"
+            + "description,"
+            + "date_debut_encheres,"
+            + "date_fin_encheres,"
+            + "prix_initial,"
+            + "prix_vente,"
+            + "no_utilisateur,"
+            + "no_categorie) VALUES(?,?,?,?,?,?,?,?)";
 
-	private static final String UPDATE = "UPDATE ARTICLES_VENDUS SET " +
-			"nom_article = ?," +
-			"description = ?," +
-			"date_debut_encheres = ?," +
-			"date_fin_encheres = ?," +
-			"prix_initial = ?," +
-			"prix_vente = ?," +
-			"no_utilisateur = ?," +
-			"no_categorie = ?," +
-			"WHERE no_article = ? ";
+    private static final String UPDATE = "UPDATE ARTICLES_VENDUS SET " +
+            "nom_article = ?," +
+            "description = ?," +
+            "date_debut_encheres = ?," +
+            "date_fin_encheres = ?," +
+            "prix_initial = ?," +
+            "prix_vente = ?," +
+            "no_utilisateur = ?," +
+            "no_categorie = ? " +
+            "WHERE no_article = ? ";
 
-	private static final String FILTER_BY_TITLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ?";
+    private static final String FILTER_BY_TITLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ?";
 	private static final String FILTER_BY_CATEGORY = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ?";
 	private static final String FILTER_BY_TITLE_CATEGORY = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ? AND no_Categorie = ?";
 
-	@Override
-	public List<ArticleVendu> getAll() throws BusinessException {
-		List<ArticleVendu> listes = new ArrayList<>();
 
-		try (Connection cnx = ConnectionProvider.getConnection()) {
-			Statement stmt = cnx.createStatement();
+    @Override
+    public List<ArticleVendu> getAll() throws BusinessException {
+        List<ArticleVendu> listes = new ArrayList<>();
 
-			ResultSet rs = stmt.executeQuery(GET_ALL);
+        try (Connection cnx = ConnectionProvider.getConnection()) {
+            Statement stmt = cnx.createStatement();
 
-			while (rs.next()) {
-				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("noArticle"),
-						rs.getString("nomArticle"),
-						rs.getString("description"),
-						rs.getDate("date_debut_encheres"),
-						rs.getDate("date_debut_fin"),
-						rs.getInt("prix_initial"),
-						rs.getInt("prix_vente"),
-						DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
-						DAOFactory.getCategorieDAO().getById(rs.getInt("no_categorie")));
-				listes.add(nouvelArticle);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+            ResultSet rs = stmt.executeQuery(GET_ALL);
 
-		return listes;
-	}
+            while (rs.next()) {
+                ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("no_article"),
+                        rs.getString("nom_article"),
+                        rs.getString("description"),
+                        rs.getDate("date_debut_encheres"),
+                        rs.getDate("date_fin_encheres"),
+                        rs.getInt("prix_initial"),
+                        rs.getInt("prix_vente"),
+                        DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
+                        DAOFactory.getCategorieDAO().getById(rs.getInt("no_categorie")));
+                listes.add(nouvelArticle);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-	@Override
-	public ArticleVendu getById(int id) throws BusinessException {
-		List<ArticleVendu> listes = new ArrayList<>();
+        return listes;
+    }
 
-		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pStmt = cnx.prepareStatement(GET_BY_ID);
-			pStmt.setInt(1, id);
+    @Override
+    public ArticleVendu getById(int id) throws BusinessException {
+        ArticleVendu nouvelArticle = null;
 
-			ResultSet rs = pStmt.executeQuery();
+        try (Connection cnx = ConnectionProvider.getConnection()) {
+            PreparedStatement pStmt = cnx.prepareStatement(GET_BY_ID);
+            pStmt.setInt(1, id);
 
-			while (rs.next()) {
-				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("noArticle"),
-						rs.getString("nomArticle"),
-						rs.getString("description"),
-						rs.getDate("date_debut_encheres"),
-						rs.getDate("date_debut_fin"),
-						rs.getInt("nomArticle"),
-						rs.getInt("nomArticle"),
-						DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
-						DAOFactory.getCategorieDAO().getById(rs.getInt("no_categorie")));
-				listes.add(nouvelArticle);
-			}
+            ResultSet rs = pStmt.executeQuery();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+            while (rs.next()) {
+                nouvelArticle = new ArticleVendu(rs.getInt("no_article"),
+                        rs.getString("nom_article"),
+                        rs.getString("description"),
+                        rs.getDate("date_debut_encheres"),
+                        rs.getDate("date_fin_encheres"),
+                        rs.getInt("prix_initial"),
+                        rs.getInt("prix_vente"),
+                        DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
+                        DAOFactory.getCategorieDAO().getById(rs.getInt("no_categorie")));
+            }
 
-		return listes.get(0);
-	}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-	@Override
-	public void insert(ArticleVendu articleVendu) throws BusinessException {
-		try (Connection cnx = ConnectionProvider.getConnection()) {
+        return nouvelArticle;
+    }
 
-			try {
-				PreparedStatement pStmt = cnx.prepareStatement(INSERT);
-				pStmt.setString(1, articleVendu.getNomArticle());
-				pStmt.setString(2, articleVendu.getDescription());
-				pStmt.setDate(3, articleVendu.getDateDebutEncheres());
-				pStmt.setDate(4, articleVendu.getDateFinEncheres());
-				pStmt.setInt(5, articleVendu.getPrixInitial());
-				pStmt.setInt(6, articleVendu.getPrixVente());
-				pStmt.setInt(7, articleVendu.getProprietaire().getNoUtilisateur());
-				pStmt.setInt(8, articleVendu.getCategorie().getNoCategorie());
+    @Override
+    public void insert(ArticleVendu articleVendu) throws BusinessException {
 
-				pStmt.executeUpdate();
+        if(articleVendu == null) {
+            throw new BusinessException();
+        }
 
-				cnx.commit();
+        try (Connection cnx = ConnectionProvider.getConnection()) {
 
-			} catch (SQLException e) {
-				e.printStackTrace();
+            try {
+                PreparedStatement pStmt = cnx.prepareStatement(INSERT,Statement.RETURN_GENERATED_KEYS);
+                pStmt.setString(1, articleVendu.getNomArticle());
+                pStmt.setString(2, articleVendu.getDescription());
+                pStmt.setDate(3, articleVendu.getDateDebutEncheres());
+                pStmt.setDate(4, articleVendu.getDateFinEncheres());
+                pStmt.setInt(5, articleVendu.getPrixInitial());
+                pStmt.setInt(6, articleVendu.getPrixVente());
+                pStmt.setInt(7, articleVendu.getProprietaire().getNoUtilisateur());
+                pStmt.setInt(8, articleVendu.getCategorie().getNoCategorie());
 
-				cnx.rollback();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+                pStmt.executeUpdate();
 
-	@Override
-	public void update(ArticleVendu articleVendu) throws BusinessException {
-		try (Connection cnx = ConnectionProvider.getConnection()) {
+                ResultSet rs = pStmt.getGeneratedKeys();
+                if(rs.next()) {
+                    articleVendu.setNoArticle(rs.getInt(1));
+                }
 
-			PreparedStatement pStmt = cnx.prepareStatement(UPDATE);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-			pStmt.setString(1, articleVendu.getNomArticle());
-			pStmt.setString(2, articleVendu.getDescription());
-			pStmt.setDate(3, articleVendu.getDateDebutEncheres());
-			pStmt.setDate(4, articleVendu.getDateFinEncheres());
-			pStmt.setInt(5, articleVendu.getPrixInitial());
-			pStmt.setInt(6, articleVendu.getPrixVente());
-			pStmt.setInt(7, articleVendu.getProprietaire().getNoUtilisateur());
-			pStmt.setInt(8, articleVendu.getCategorie().getNoCategorie());
-			pStmt.setInt(9, articleVendu.getNoArticle());
+    @Override
+    public void update(ArticleVendu articleVendu) throws BusinessException {
+        try (Connection cnx = ConnectionProvider.getConnection()) {
 
-			int rs = pStmt.executeUpdate();
+            PreparedStatement pStmt = cnx.prepareStatement(UPDATE);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+            pStmt.setString(1, articleVendu.getNomArticle());
+            pStmt.setString(2, articleVendu.getDescription());
+            pStmt.setDate(3, articleVendu.getDateDebutEncheres());
+            pStmt.setDate(4, articleVendu.getDateFinEncheres());
+            pStmt.setInt(5, articleVendu.getPrixInitial());
+            pStmt.setInt(6, articleVendu.getPrixVente());
+            pStmt.setInt(7, articleVendu.getProprietaire().getNoUtilisateur());
+            pStmt.setInt(8, articleVendu.getCategorie().getNoCategorie());
+            pStmt.setInt(9, articleVendu.getNoArticle());
 
-	@Override
-	public void delete(ArticleVendu articleVendu) throws BusinessException {
-		try (Connection cnx = ConnectionProvider.getConnection()) {
+            int rs = pStmt.executeUpdate();
 
-			PreparedStatement pStmt = cnx.prepareStatement(DELETE);
-			pStmt.setInt(1, articleVendu.getNoArticle());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-			pStmt.executeUpdate();
+    @Override
+    public void delete(ArticleVendu articleVendu) throws BusinessException {
+        try (Connection cnx = ConnectionProvider.getConnection()) {
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+            PreparedStatement pStmt = cnx.prepareStatement(DELETE);
+            pStmt.setInt(1, articleVendu.getNoArticle());
 
-	@Override
-	public List<ArticleVendu> filtreParTitre(String nomRecherche) throws BusinessException {
+            pStmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    	@Override
+	public List<ArticleVendu> filtreParTitre(String nomRecherche) {
 		List<ArticleVendu> listes = new ArrayList<>();
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -179,11 +184,11 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			ResultSet rs = pStmt.executeQuery();
 
 			while (rs.next()) {
-				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("noArticle"),
-						rs.getString("nomArticle"),
+				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("no_article"),
+						rs.getString("nom_article"),
 						rs.getString("description"),
 						rs.getDate("date_debut_encheres"),
-						rs.getDate("date_debut_fin"),
+						rs.getDate("date_fin_encheres"),
 						rs.getInt("prix_initial"),
 						rs.getInt("prix_vente"),
 						DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
@@ -198,7 +203,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	}
 
 	@Override
-	public List<ArticleVendu> filtreParCategorie(int noCategorie) throws BusinessException {
+	public List<ArticleVendu> filtreParCategorie(int noCategorie) {
 		List<ArticleVendu> listes = new ArrayList<>();
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -207,11 +212,11 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			ResultSet rs=pStmt.executeQuery();
 
 			while (rs.next()) {
-				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("noArticle"),
-						rs.getString("nomArticle"),
+				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("no_article"),
+						rs.getString("nom_article"),
 						rs.getString("description"),
 						rs.getDate("date_debut_encheres"),
-						rs.getDate("date_debut_fin"),
+						rs.getDate("date_fin_encheres"),
 						rs.getInt("prix_initial"),
 						rs.getInt("prix_vente"),
 						DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
@@ -226,7 +231,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	}
 
 	@Override
-	public List<ArticleVendu> filtreParRechercheEtCategorie(String nomRecherche, int noCategorie) throws BusinessException {
+	public List<ArticleVendu> filtreParRechercheEtCategorie(String nomRecherche, int noCategorie) {
 		List<ArticleVendu> listes = new ArrayList<>();
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -236,11 +241,11 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			ResultSet rs=pStmt.executeQuery();
 
 			while (rs.next()) {
-				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("noArticle"),
-						rs.getString("nomArticle"),
+				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("no_article"),
+						rs.getString("nom_article"),
 						rs.getString("description"),
 						rs.getDate("date_debut_encheres"),
-						rs.getDate("date_debut_fin"),
+						rs.getDate("date_fin_encheres"),
 						rs.getInt("prix_initial"),
 						rs.getInt("prix_vente"),
 						DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
@@ -253,4 +258,4 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
 		return listes;
 	}
-	}
+}

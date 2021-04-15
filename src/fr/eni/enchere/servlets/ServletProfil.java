@@ -23,15 +23,18 @@ public class ServletProfil extends HttpServlet {
 
 		int id = (int) session.getAttribute("user_id");
 		UtilisateurManager monprofil = new UtilisateurManager();
+
 		Utilisateur utilisateur = monprofil.getById(id);
 
 		if (modification == null ) {
 			request.setAttribute("monProfil", utilisateur);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/UtilisateurProfil.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
+			request.setAttribute("pageAAfficher", "/WEB-INF/UtilisateurProfil.jsp");
 			rd.forward(request, response);
 		} else if (modification.equalsIgnoreCase("modify")){
 			request.setAttribute("monProfil", utilisateur);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/UtilisateurModifierProfil.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
+			request.setAttribute("pageAAfficher", "/WEB-INF/UtilisateurModifierProfil.jsp");
 			rd.forward(request, response);
 		}
 	}

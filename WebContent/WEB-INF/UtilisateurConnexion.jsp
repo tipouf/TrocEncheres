@@ -1,39 +1,14 @@
-<!DOCTYPE html>
-<html>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<head>
-    <c:set var="context" value="${pageContext.request.contextPath}"/>
-    <%
-        String error = (String) request.getAttribute("error");
-    %>
-
-    <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Page de connexion</title>
-
-    <!-- Bootstrap core CSS -->
-    <link
-            href="${context}/vendor/bootstrap/css/bootstrap.min.css"
-            rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="${context}/css/connexion.css"
-          rel="stylesheet">
-</head>
-<body>
-<%@include file="entete.jsp" %>
-<div class="container jumbotron marginConnexion">
-    <h1 class="display-4 text-left">Connexion</h1>
+<c:set var="context" value="${pageContext.request.contextPath}"/>
+<%
+    String error = (String) request.getAttribute("error");
+%>
+<div class="card mt-5">
+    <div class="card-header">
+        <h1 class="card-title text-left">Connexion</h1>
+    </div>
     <div class="card-body">
         <form action="<%=request.getContextPath()%>/connexion" method="post">
-
             <div class=" form-group row">
                 <label for="lastName" class="col-sm-2 col-form-label">Identifiant:</label>
                 <div class="col-sm-4">
@@ -55,23 +30,20 @@
                     }
                 %>
             </div>
-            <div class="clearfix mt-3 login-buttons">
-                <button type="submit" class="btn btn-primary float-end"
-                        data-dismiss="modal">
-                    <span class="glyphicon glyphicon-remove"></span>Connexion
-                </button>
-                <a class="btn btn-danger float-end"
-                   href="${context}/inscription"
-                   data-dismiss="modal"> CrÃ©er un compte </a>
+            <div class="row mt-3">
+                <div class="col-6 text-start">
+                    <button class="btn btn-danger" onclick="window.location='${pageContext.request.contextPath}/index';return false;">Annuler</button>
+                </div>
+                <div class="col-6 text-end">
+                    <button class="btn btn-info"
+                            onclick="window.location='${pageContext.request.contextPath}/inscription';return false;">
+                        Créer un compte
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Connexion
+                    </button>
+                </div>
             </div>
         </form>
     </div>
 </div>
-
-<!-- Bootstrap core JavaScript -->
-<script
-        src="${context}/vendor/jquery/jquery.min.js"></script>
-<script
-        src="${context}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>

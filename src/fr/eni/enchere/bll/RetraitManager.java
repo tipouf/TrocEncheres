@@ -14,8 +14,25 @@ public class RetraitManager {
 	}
 
 	public void ajouter(Retrait retrait) throws BusinessException {
+		if (!retrait.getRue().equals("")
+				&& !retrait.getCodePostal().equals("")
+				&& !retrait.getVille().equals("")) {
 
-		retraitDAO.insert(retrait);
+			retraitDAO.insert(retrait);
+		} else {
+			String error = "";
+			if (retrait.getRue().equals("")) {
+				error += "La rue ne peut être nulle. \n";
+			}
+			if (retrait.getCodePostal().equals("")) {
+				error += "Le code postal ne peut être nul. \n";
+			}
+			if (retrait.getVille().equals("")) {
+				error += "La ville ne peut être nulle. \n";
+			}
+
+			throw new BusinessException(error);
+		}
 	}
 
 	public void modifier(Retrait retrait) throws BusinessException {
@@ -25,7 +42,7 @@ public class RetraitManager {
 
 	public void effacer(Retrait retrait) throws BusinessException {
 
-		retraitDAO.delete(retrait);
+		retraitDAO.delete(retrait);;
 	}
 
 	public Retrait getById(int noArticle) throws BusinessException {

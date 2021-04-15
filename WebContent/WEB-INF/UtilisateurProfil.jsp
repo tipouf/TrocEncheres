@@ -1,94 +1,83 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<html>
-<head>
-<title>Mon Profil</title>
-<c:set var="context" value="${pageContext.request.contextPath}" />
-<!-- Bootstrap core CSS -->
-<link href="${context}/vendor/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="context" value="${pageContext.request.contextPath}"/>
 <!-- Custom styles for this template -->
 <link href="${context}/css/utilisateurProfil.css" rel="stylesheet">
-</head>
-<body>
-	<%@include file="entete.jsp"%>
-	<div class="container mt-5">
-		<div class="container jumbotron marginProfil">
-			<div class="card-body">
-				<h1 class="display-4 text-left">Mon profil</h1>
-				<div class="card-body border">
+<div class="mt-5 card">
+    <div class="card-header">
+        <h1 class="card-title">Mon profil</h1>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-2">
+                <label for="lastName" class="fw-bold">Pseudo:</label>
+            </div>
+            <div class="col-8">
+                <label for="lastName">${monProfil.pseudo}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <label for="lastName" class="fw-bold">Nom:</label>
+            </div>
+            <div class="col-8">
+                <label for="lastName">${monProfil.nom}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <label for="lastName" class="fw-bold">Prénom:</label>
+            </div>
+            <div class="col-8">
+                <label for="lastName">${monProfil.prenom}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <label for="lastName" class="fw-bold">Email:</label>
+            </div>
+            <div class="col-8">
+                <label for="lastName">${monProfil.email}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <label for="lastName" class="fw-bold">Téléphone:</label>
+            </div>
+            <div class="col-8">
+                <label for="lastName">${monProfil.telephone}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <label for="lastName" class="fw-bold">Rue:</label>
+            </div>
+            <div class="col-8">
+                <label for="lastName">${monProfil.rue}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <label for="lastName" class="fw-bold">Code postal:</label>
 
-					<div class="row">
-
-						<label for="lastName" class="col-sm-2 fw-bold"">Pseudo:</label> <label
-							for="lastName" class="col-sm-2 col-form-label">${monProfil.pseudo}</label>
-					</div>
-					<div class="row">
-
-						<label for="lastName" class="col-sm-2 col-form-label fw-bold"">Nom:</label>
-
-						<label for="lastName" class="col-sm-2 col-form-label">${monProfil.nom}</label>
-
-					</div>
-					<div class="row">
-
-						<label for="lastName" class="col-sm-2 col-form-label fw-bold">PrÃ©nom:</label>
-
-
-						<label for="lastName" class="col-sm-2 col-form-label">${monProfil.prenom}</label>
-
-					</div>
-					<div class="row">
-
-						<label for="lastName" class="col-sm-2 col-form-label fw-bold">Email:</label>
-
-
-						<label for="lastName" class="col-sm-2 col-form-label">${monProfil.email}</label>
-
-					</div>
-					<div class="row">
-
-						<label for="lastName" class="col-sm-2 col-form-label fw-bold">TÃ©lÃ©phone:</label>
-
-						<label for="lastName" class="col-sm-2 col-form-label">${monProfil.telephone}</label>
-
-					</div>
-					<div class="row">
-
-						<label for="lastName" class="col-sm-2 col-form-label fw-bold">Rue:</label>
-
-						<label for="lastName" class="col-sm-2 col-form-label">${monProfil.rue}</label>
-
-					</div>
-					<div class="row">
-
-						<label for="lastName" class="col-sm-2 col-form-label fw-bold">Code
-							postal:</label> <label for="lastName" class="col-sm-2 col-form-label">${monProfil.codePostal}</label>
-
-					</div>
-					<div class="row">
-
-						<label for="lastName" class="col-sm-2 col-form-label fw-bold">Ville:</label>
-
-
-						<label for="lastName" class="col-sm-2 col-form-label">${monProfil.ville}</label>
-
-					</div>
-				</div>
-				<div class="clearfix mt-3 login-buttons">
-					<form method="post" action="ServletProfil">
-						<button type="submit" value="modify" name="modifier" class="btn btn-primary float-end">
-							Modifier
-						</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Bootstrap core JavaScript -->
-	<script src="${context}/vendor/jquery/jquery.min.js"></script>
-	<script src="${context}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+            </div>
+            <div class="col-8">
+                <label for="lastName">${monProfil.codePostal}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <label for="lastName" class="fw-bold">Ville:</label>
+            </div>
+            <div class="col-8">
+                <label for="lastName">${monProfil.ville}</label>
+            </div>
+        </div>
+        <div class="clearfix mt-3 login-buttons">
+            <form method="post" action="ServletProfil">
+                <button type="submit" value="modify" name="modifier" class="btn btn-primary float-end">
+                    Modifier
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

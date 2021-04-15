@@ -1,0 +1,71 @@
+body{
+    background-color: #3a444f;
+}
+.dropdown-item.active, .dropdown-item:active{
+    background-color: #212529!important;
+}
+
+/* Style des cards */
+a .card{
+    pointer-events: none;
+    color: black;
+}
+.card{
+    background-color: lightgray;
+}
+
+/* Style des boutons */
+button {
+    min-width:20%;
+}
+
+/* Style primary */
+.btn-primary{
+    color: white;
+    background-color: #212529;
+    border-color: lightgray;
+}
+.btn-primary:active{
+    color: #212529;
+    background-color: transparent;
+    border-color: #212529;
+}
+.btn-primary:hover{
+    color: #212529;
+    background-color: transparent;
+    border-color: #212529;
+}
+
+/* Style danger */
+.btn-danger{
+    color: white;
+    background-color: #dc3545;
+    border-color: lightgray;
+}
+.btn-danger:active{
+    color: #dc3545;
+    background-color: transparent;
+    border-color: #dc3545;
+}
+.btn-danger:hover{
+    color: #dc3545;
+    background-color: transparent;
+    border-color: #dc3545;
+}
+
+/* Style info */
+.btn-info{
+    color: white;
+    background-color: #3a444f;
+    border-color: lightgray;
+}
+.btn-info:active{
+    color: #3a444f;
+    background-color: transparent;
+    border-color: #3a444f;
+}
+.btn-info:hover{
+    color: #3a444f;
+    background-color: transparent;
+    border-color: #3a444f;
+}

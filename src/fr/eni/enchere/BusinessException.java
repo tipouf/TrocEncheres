@@ -18,6 +18,10 @@ public class BusinessException extends Exception {
 	public BusinessException() {
 		listeCodesErreur = new ArrayList<Integer>();
 	}
+
+	public BusinessException(String message) {
+		super(message);
+	}
 	
 	public void ajouterErreur(int code) {
 		if(!listeCodesErreur.contains(code)) {

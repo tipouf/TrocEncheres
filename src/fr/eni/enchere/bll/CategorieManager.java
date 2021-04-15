@@ -1,11 +1,10 @@
 package fr.eni.enchere.bll;
 
-import fr.eni.enchere.BusinessException;
+import java.util.ArrayList;
+
 import fr.eni.enchere.bo.Categorie;
 import fr.eni.enchere.dal.DAOFactory;
 import fr.eni.enchere.dal.categorie.CategorieDAO;
-
-import java.util.ArrayList;
 
 public class CategorieManager {
     private CategorieDAO categorieDAO;
@@ -14,15 +13,12 @@ public class CategorieManager {
         categorieDAO = DAOFactory.getCategorieDAO();
     }
 
-    public ArrayList<Categorie> getAll() throws BusinessException {
+    public ArrayList<Categorie> getAll() {
         return (ArrayList<Categorie>) categorieDAO.getAll();
     }
 
-    public Categorie getById(int id) throws BusinessException {
+    public Categorie getById(int id){
         return categorieDAO.getById(id);
     }
-    
-    public int getByLibelle(String libelle) throws BusinessException {
-        return categorieDAO.getByLibelle(libelle);
-    }
+
 }
